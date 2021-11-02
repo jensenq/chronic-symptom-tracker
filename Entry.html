@@ -6,7 +6,36 @@
     </head>
     <body>
         <h1>Write Down Your Thoughts</h1>
-        <textarea id = "jEntry" name = "jEntry" rows = "4" cols = "50" placeholder="Enter your thoughts here..."></textarea>
-        <div class = "btn"><a href = "Home.html">Submit</a></div>
+
+	
+	<form id="input_form">
+		<label for="example_slider">How are you feeling?</label><br>
+		<input  type="range"    id="example_slider" class="slider" min="1" max="100" value="50"><br>
+        <textarea id = "jEntry" name = "jEntry" rows = "4" cols = "50" placeholder="Enter your thoughts here..."></textarea><br>
+		<button type="submit"   id="submit_input_btn"><a href = "Home.html">Submit</a></button>
+   </form>
+
+
+<!--
+<div class = "btn"><a href = "Home.html">Submit</a></div>
+-->
+
+<script>
+
+ 	let input_form = document.getElementById('input_form');
+	input_form.addEventListener('submit', function(e){
+		e.preventDefault();
+		
+		var journal_text = e.target.children.journal_text.value
+		console.log(journal_text)
+		
+		var slider_val = e.target.children.example_slider.value
+		console.log(slider_val)
+		
+    })   
+
+
+</script>
+
     </body>
 </html>

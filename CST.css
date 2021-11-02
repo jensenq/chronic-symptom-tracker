@@ -3,6 +3,16 @@ body
     width: 600px;
 }
 
+.slider {
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
 .btn
 {
     background-color: aqua;

@@ -1,6 +1,7 @@
 body
 {
     width: 600px;
+    height: 1000px;
 }
 
 .slider {
@@ -45,4 +46,34 @@ body
 textarea
 {
     resize: none;
+}
+
+.home
+{
+
+}
+
+.symptoms
+{
+
+}
+
+.entry
+{
+
+}
+
+.profile
+{
+
+}
+
+.milestones
+{
+
+}
+
+.line-graph
+{
+    
 }

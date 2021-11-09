@@ -1,8 +1,36 @@
-body
-{
-    width: 600px;
-    height: 1000px;
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,600);
+
+* {
+	transition: color 0.5s;
 }
+
+html {
+	min-height: 200px;
+}
+body {
+}
+
+html,
+body {
+	background-color: #1d1f2b;
+	width:  400px;
+	height: 400px;
+	margin: 0;
+	padding: 0;
+	color: #fff;
+	font: 300 12px 'Open Sans', 'Segoe UI', 'Tahoma', sans-serif;
+	letter-spacing: 0.05em !important;
+}
+a {
+	color: #ec1a55;
+	cursor: pointer;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+
+/* ******* */
 
 .slider {
   opacity: 0.7;

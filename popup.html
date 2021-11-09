@@ -1,35 +1,122 @@
 <!DOCTYPE html>
-<link rel = "Stylesheet" href = "style.css">
 <html>
-    <head>
-        <title>Welcome to Chronic Symptom Tracker</title>
-    </head>
-    <body>
-        <div class = "home">
-            <h1>Welcome to Chronic Symptom Tracker</h1>
-            <div class = "btn">Input</div>
-        </div>
-        <div class = "symptoms">
-            <h1>Please Input Your Symptoms</h1>
-            <div class = "btn">Input</div>
-        </div>
-        <div class = "entry">
-            <h1>Write Down Your Thoughts</h1>
-	        <form id="input_form">
-		    <label for="example_slider">How are you feeling?</label><br>
-		    <input  type="range"    id="example_slider" class="slider" min="1" max="100" value="50"><br>
-            <textarea id = "jEntry" name = "jEntry" rows = "4" cols = "50" placeholder="Enter your thoughts here..."></textarea><br>
-		    <button type="submit"   id="submit_input_btn">Submit</button>
-            </form>
-        </div>
-        <div class = "profile">
-            <h1>Your Profile</h1>
-        </div>
-        <div class = "milestones">
-            <h1>Milestones</h1>
-        </div>
-        <div class = "line-graph">
-            <h1>Line Graph</h1>
-        </div>
-    </body>
+
+<head>
+	<title>Chronic Symptom Tracker</title>
+	<meta name="viewport" content="width=470">
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+
+<body>
+<div id="container">
+
+	<!-- 1. HOME PAGE -->
+	<div id="home" style="display:initial">
+		<h1>Welcome to Chronic Symptom Tracker</h1>
+		<div id="calendar" style="height:0;width:20%;padding-bottom:20%;background-color:red"> calendar </div>
+		<button id="home_to_symptoms"> MAKE AN ENTRY </button>
+		<button id="home_to_profile"> PROFILE </button>
+		<button id="home_to_milestones"> MILESTONES </button>
+	</div>
+	
+	<br><hr><br>
+
+	<!-- 2. SYMPTOMS PAGE -->
+	<div id="symptoms" style="display:initial">
+
+		<input type="range"	id="overall_slider" class="slider" min="1" max="100" value="50">
+		<label for="overall_slider">How are you feeling overall?</label><br>
+
+		<form id="symptoms_form">
+
+			<!-- this is a static example for testing. final product is dynamic. -->
+			<div id="symptoms_accordian">
+
+				<ul class="accordian_container">
+
+					<li class="accordian_item">
+						<input class="accordion_input" type="checkbox" name ="symptom1" id="symptom_x">
+						<label class="accordion_label" for="symptom1"> <span>Symptom1</span> </label>
+
+						<ul class="accordian_container">
+							<li class="accordian_item"> 
+								<span> descriptor 1
+								<input  type="range"	id="example_slider" class="slider" min="1" max="100" value="50">
+								</span> </li>
+							<li class="accordian_item"> 
+								<span> descriptor 2
+								<input  type="range"	id="example_slider" class="slider" min="1" max="100" value="50">
+								</span> </li>
+							<li class="accordian_item"> 
+								<span> descriptor 3
+								<input  type="range"	id="example_slider" class="slider" min="1" max="100" value="50">
+							</span> </li>
+						</ul>
+					</li>
+
+					<li class="accordian_item">
+						<input class="accordion_input" type="checkbox" name ="symptom2" id="symptom_x">
+						<label class="accordion_label" for="symptom1"> <span>Symptom2</span> </label>
+
+						<ul class="accordian_container">
+							<li class="accordian_item"> 
+								<span> descriptor 1
+								<input  type="range"	id="example_slider" class="slider" min="1" max="100" value="50">
+								</span> </li>
+							<li class="accordian_item"> 
+								<span> descriptor 2
+								<input  type="range"	id="example_slider" class="slider" min="1" max="100" value="50">
+								</span> </li>
+							<li class="accordian_item"> 
+								<span> descriptor 3
+								<input  type="range"	id="example_slider" class="slider" min="1" max="100" value="50">
+							</span> </li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+
+			<button type="submit" id="symptoms_to_journal">Journal</button>
+		</form>
+	</div>
+	
+	<br><hr><br>
+
+	<!-- 3. JOURNAL PAGE -->
+	<div id="journal" style="display:initial">
+		<!-- todo: date -->
+		<h1>Write Down Your Thoughts</h1>
+	   <form id="journal_form">
+			<textarea id = "jEntry" name = "jEntry" rows = "4" cols = "50" placeholder="Enter your thoughts here..."></textarea><br>
+			<button type="submit" id="journal_to_home">Submit</button>
+		</form>
+	</div>
+
+	<br><hr><br>
+	
+	<!-- 4. PROFILE PAGE -->
+	<div id="profile" style="display:initial">
+		<h1>Your Profile</h1>
+	</div>
+
+	<br><hr><br>
+
+	<!-- 5. MILESTONES PAGE -->
+	<div id="milestones" style="display:initial">
+		<h1>Milestones</h1>
+	</div>
+	
+	<br><hr><br>
+	
+	<!-- 6. VISUALIZATIONS PAGE -->
+	<div id="viz" style="display:initial">
+		<h1>Visualizations of your data</h1>
+	</div>
+
+
+
+</div>
+<script src="foreground.js"></script>
+</body>
 </html>

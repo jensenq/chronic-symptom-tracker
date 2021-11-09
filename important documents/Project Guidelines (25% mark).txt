@@ -1,0 +1,19 @@
+Coding Guidelines for the Project
+-Front End
+	Design
+	Coding (HTML, CSS)
+	~Jared, Shipei~
+-Back End
+	Coding (JavaScript)
+	~Quentin, Jaden~
+Target goals (25% mark)
+-Input Sequence
+	Making an entry and storing it in a table
+	Button for input, for now
+-Front End
+	Prompt user for input and take it
+-Back End
+	Take user input and store it
+	
+-Add comments to code
+

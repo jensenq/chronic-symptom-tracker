@@ -12,9 +12,8 @@ body {
 
 html,
 body {
-	background-color: #1d1f2b;
-	width:  400px;
-	height: 400px;
+	width:  600px;
+	height: 600px;
 	margin: 0;
 	padding: 0;
 	color: #fff;
@@ -104,4 +103,42 @@ textarea
 .line-graph
 {
     
+#accordion .panel-heading {
+    padding: 0;
 }
+
+#accordion .panel-title>a {
+	display: block;
+	padding: 0.4em 0.6em;
+	outline: none;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#accordion .panel-title>a.accordion-toggle::before, #accordion a[data-toggle="collapse"]::before
+	{
+	content: "\e113";
+	float: left;
+	font-family: 'Glyphicons Halflings';
+	margin-right: 1em;
+}
+
+#accordion .panel-title>a.accordion-toggle.collapsed::before, #accordion a.collapsed[data-toggle="collapse"]::before
+	{
+	content: "\e114";
+}
+#accordion.panel-group .panel{
+	margin-top: 5px;
+}
+#accordion .actions_div > a {
+     font-size: 14px;
+    margin-right: 15px;
+}
+#accordion .actions_div > a.exit-btn {
+color:#dd4b39;
+}
+#accordion .remove_field.exit-btn{
+color:#dd4b39;
+margin-left:7px;
+float: left;
+}}

@@ -1,10 +1,13 @@
 
 /* implementation idea: "changes page" by setting all 
  * other page's div's to display:none
- * a hard-coded list of all the page's div's id's might be needed?
+ * it might make things easier if we wrap it all in a <ul>,
+ * with each page's div as an item inside this list
+ *
+ * then to use this function for a button: 
+ * let button = document.getElementById("my_cool_button")
+ * button.addEventListener('click', changePage);
  * 
- * then to change page upon some button being clicked:
- * let button = document.
  */
 function changePage(target_page){
 }
@@ -34,7 +37,8 @@ symptoms_form.addEventListener('submit', saveSymptomsForm);
 function saveJournalForm(event){
 	event.preventDefault();
 	var text = event.target.children.journal_text.value
-	//console.log(text)
+
+	// todo: save data alongside date/time
 	chrome.storage.sync.set({ text });
 	changePage("home")	
 }

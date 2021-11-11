@@ -75,32 +75,32 @@ textarea
     resize: none;
 }
 
-.home
+#home
 {
 
 }
 
-.symptoms
+#symptoms
 {
 
 }
 
-.entry
+#entry
 {
 
 }
 
-.profile
+#profile
 {
 
 }
 
-.milestones
+#milestones
 {
 
 }
 
-.line-graph
+#line-graph
 {
     
 #accordion .panel-heading {
@@ -141,4 +141,5 @@ color:#dd4b39;
 color:#dd4b39;
 margin-left:7px;
 float: left;
-}}
+}
+}

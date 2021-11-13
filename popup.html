@@ -13,8 +13,66 @@
 
 	<!-- 1. HOME PAGE -->
 	<div id="home" style="display:initial">
-		<h1>Welcome to Chronic Symptom Tracker</h1>
-		<div id="calendar" style="height:0;width:20%;padding-bottom:20%;background-color:red"> calendar </div>
+		<div class="calendar">
+			<h1>Welcome to Chronic Symptom Tracker</h1>
+			<table>
+				<tr>
+					<th>Sunday</th>
+					<th>Monday</th>
+					<th>Tuesday</th>
+					<th>Wednesday</th>
+					<th>Thursday</th>
+					<th>Friday</th>
+					<th>Saturday</th>
+				</tr>
+				<tr>
+					<td></td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+					<td>10</td>
+					<td>11</td>
+					<td>12</td>
+					<td>13</td>
+				</tr>
+				<tr>
+					<td>14</td>
+					<td>15</td>
+					<td>16</td>
+					<td>17</td>
+					<td>18</td>
+					<td>19</td>
+					<td>20</td>
+				</tr>
+				<tr>
+					<td>21</td>
+					<td>22</td>
+					<td>23</td>
+					<td>24</td>
+					<td>25</td>
+					<td>26</td>
+					<td>27</td>
+				</tr>
+				<tr>
+					<td>28</td>
+					<td>29</td>
+					<td>30</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+		
 		<button id="home_to_symptoms"> MAKE AN ENTRY </button>
 		<button id="home_to_profile"> PROFILE </button>
 		<button id="home_to_milestones"> MILESTONES </button>
@@ -104,6 +162,14 @@
 	<!-- 5. MILESTONES PAGE -->
 	<div id="milestones" style="display:initial">
 		<h1>Milestones</h1>
+		<h3>You have currently logged in for 5 days.</h3>
+		<h3>Log in 2 more days and you'll unlock the dancing cat gif!</h3>
+		<h4>Current Milestone Unlocks:</h4>
+		<ul>
+			<li>Account created! All features are unlocked!</li>
+			<li>You created your first journal entry!</li>
+			<li>You created your first custom symptom!</li>
+		</ul>
 	</div>
 	
 	<br><hr><br>
@@ -111,6 +177,10 @@
 	<!-- 6. VISUALIZATIONS PAGE -->
 	<div id="viz" style="display:initial">
 		<h1>Visualizations of your data</h1>
+		<h3>Here is your graph report for the month of October</h3>
+		<div id="graph" style="height:0;width:80%;padding-bottom:20%;background-color:red">
+			<h4>ERROR: Could not load graph</h4>
+		</div>
 	</div>
 
 

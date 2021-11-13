@@ -7,8 +7,6 @@
 html {
 	min-height: 200px;
 }
-body {
-}
 
 html,
 body {
@@ -95,9 +93,27 @@ textarea
 
 }
 
+#profile-picture
+{
+	width: 100px;
+	height: 100px;
+	margin-right: 10px;
+	float: left;
+	background-color: aqua;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+	border: #262626, 2px;
+}
+
 #milestones
 {
 
+}
+
+.clear
+{
+	clear: both;
 }
 
 #line-graph

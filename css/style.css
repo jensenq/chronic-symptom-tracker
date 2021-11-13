@@ -1,0 +1,161 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,600);
+
+* {
+	transition: color 0.5s;
+}
+
+html {
+	min-height: 200px;
+}
+
+html,
+body {
+	width:  600px;
+	height: 600px;
+	margin: 0;
+	padding: 0;
+	color: #fff;
+	font: 300 12px 'Open Sans', 'Segoe UI', 'Tahoma', sans-serif;
+	letter-spacing: 0.05em !important;
+}
+a {
+	color: #ec1a55;
+	cursor: pointer;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+
+/* ******* */
+
+.slider {
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.btn
+{
+    background-color: aqua;
+    width: 80px;
+    height: 40px;
+    border: none;
+    color: white;
+    padding: 15px, 32px;
+    text-align: center;
+    font-size: 30px;
+}
+
+.container-form
+{
+    text-align: center;
+    width: 60%;
+    margin: 10px auto;
+    color: #fff;
+    font-size: 50px;
+    border: black, 2px;
+}
+
+.container-form input
+{
+    width: 250px;
+    height: 550px;
+    font-size: 20px;
+}
+
+textarea
+{
+    resize: none;
+}
+
+#home
+{
+
+}
+
+#symptoms
+{
+
+}
+
+#entry
+{
+
+}
+
+#profile
+{
+
+}
+
+#profile-picture
+{
+	width: 100px;
+	height: 100px;
+	margin-right: 10px;
+	float: left;
+	background-color: aqua;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+	border: #262626, 2px;
+}
+
+#milestones
+{
+
+}
+
+.clear
+{
+	clear: both;
+}
+
+#line-graph
+{
+    
+#accordion .panel-heading {
+    padding: 0;
+}
+
+#accordion .panel-title>a {
+	display: block;
+	padding: 0.4em 0.6em;
+	outline: none;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#accordion .panel-title>a.accordion-toggle::before, #accordion a[data-toggle="collapse"]::before
+	{
+	content: "\e113";
+	float: left;
+	font-family: 'Glyphicons Halflings';
+	margin-right: 1em;
+}
+
+#accordion .panel-title>a.accordion-toggle.collapsed::before, #accordion a.collapsed[data-toggle="collapse"]::before
+	{
+	content: "\e114";
+}
+#accordion.panel-group .panel{
+	margin-top: 5px;
+}
+#accordion .actions_div > a {
+     font-size: 14px;
+    margin-right: 15px;
+}
+#accordion .actions_div > a.exit-btn {
+color:#dd4b39;
+}
+#accordion .remove_field.exit-btn{
+color:#dd4b39;
+margin-left:7px;
+float: left;
+}
+}

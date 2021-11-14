@@ -100,7 +100,40 @@
 	<div class="clear"></div>
 
 	<br><hr><br>
+	<!-- 4.5. "CREATE PROFILE" PAGE -->
+        <div id="create_profile" style="display:initial">
+                <h1>Create Profile</h1>
+                <form id="profile_form">
+                        First Name :
+                        <input type="text" id="first_name">
+                        <br>
+                        Last Name :
+                        <input type="text" id="last_name">
+                        <br>
+                        Date of Birth :
+                        <input type="date" id="dob">
+                        <br>
+                        Street Address :
+                        <input type="text" id="address">
+                        <br>
+                        Phone Number (X-XXX-XXX-XXXX) :
+                        <input type="text" id="phone_number">
+                        <br>
+                        Healthcare Provider :
+                        <input type="text" id="healthcare_provider">
+                        <br>
+                        Medications(comma seperated) :
+                        <input type="text" id="medications">
+                        <br>
+                        <input type="submit">
 
+
+
+                </form>
+        </div>
+	
+        <br><hr><br>
+	
 	<!-- 5. MILESTONES PAGE -->
 	<div id="milestones" style="display:initial">
 		<h1>Milestones</h1>
@@ -116,6 +149,7 @@
 
 
 </div>
+<script src="js/notification.js"></script>
 <script src="js/jquery-3.6.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/foreground.js"></script> <!-- do not move. this script must be ran after all DOM content has been loaded -->

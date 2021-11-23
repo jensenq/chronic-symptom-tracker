@@ -29,8 +29,7 @@ a:hover {
 
 hr
 {
-	color: #262626;
-	background-color: #262626;
+	border: 5px solid black;
 }
 /* ******* */
 
@@ -49,14 +48,15 @@ hr
   opacity: 1;
 }
 
-.btn
+button
 {
-    background-color: aqua;
-    width: 80px;
+    background-color: white;
+    width: 120px;
     height: 40px;
-    border: none;
+    border: 2px solid black;
+	border-radius: 10px;
     color: white;
-    padding: 15px, 32px;
+    padding: 5px, 5px;
     text-align: center;
     font-size: 30px;
 }
@@ -82,6 +82,8 @@ hr
 #calendar
 {
 	background-color: #fce7b0;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 
@@ -101,7 +103,12 @@ textarea
 	text-align: center;
 }
 
-#entry
+#symptoms label
+{
+	font-size: 20px;
+}
+
+#journal
 {
 	text-align: center;
 }
@@ -109,6 +116,16 @@ textarea
 #profile
 {
 
+}
+
+#profile h1
+{
+	text-align: center;
+}
+
+#profile button
+{
+	float: right;
 }
 
 #profile-picture
@@ -144,6 +161,13 @@ textarea
 	text-align: center;
 	padding-top: 50px;
 	padding-bottom: 50px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#viz
+{
+	text-align: center;
 }
 
 #line-graph

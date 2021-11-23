@@ -21,7 +21,7 @@
 		<button id="next_month"> &gt  </button>
 			<div id="cal-heatmap"></div>
 		</div>
-		<button id="home_to_symptoms"   > MAKE AN ENTRY </button>
+		<button id="home_to_symptoms"   > NEW ENTRY </button>
 		<button id="home_to_profile"    > PROFILE </button>
 		<button id="home_to_milestones" > MILESTONES </button>
 		<button id="home_to_viz" > VISUALIZATION </button>
@@ -59,13 +59,6 @@
 			
 						
 					</div>
-					<!-- /.panel-body -->
-					<div class="panel-footer">
-						<div class="col-sm-offset-3 col-sm-6 text-center">
-							
-						</div>
-			
-					</div>
 					<!-- /.box-footer -->
 				</form>
 			</div>
@@ -75,7 +68,6 @@
 
 			<button type="submit" id="symptoms_to_journal">Next</button>
 		</form>
-	<br><hr><br>
 	</div>
 	
 
@@ -83,17 +75,18 @@
 	<div id="journal" style="display:initial">
 		<!-- todo: date -->
 		<h1>Write Down Your Thoughts</h1>
+		<hr>
 	   <form id="journal_form">
 			<textarea id = "journal_text" name = "jEntry" rows = "4" cols = "50" placeholder="Enter your thoughts here..."></textarea><br>
 			<button type="submit" id="journal_to_home">Submit</button>
 		</form>
-	<br><hr><br>
 	</div>
 
 	
 	<!-- 4. PROFILE PAGE -->
 	<div id="profile" style="display:initial">
 		<h1>Your Profile</h1>
+		<hr>
 		<div id="profile-picture">
 			<h4>Your picture here</h4>
 		</div>
@@ -104,7 +97,6 @@
 		<p>Medication:</p>
 		<button id="profile_to_home" > HOME </button>
 		<button id="profile_to_edit" > EDIT PROFILE </button>
-	<br><hr><br>
 	</div>
 	<div class="clear"></div>
 
@@ -145,6 +137,7 @@
 	<!-- 5. MILESTONES PAGE -->
 	<div id="milestones" style="display:initial">
 		<h1>Milestones</h1>
+		<hr>
 		<h3>You have currently logged in for 5 days.</h3>
 		<h3>Log in 2 more days and you'll unlock the dancing cat gif!</h3>
 		<h4>Current Milestone Unlocks:</h4>
@@ -160,6 +153,7 @@
 	<!-- 6. VISUALIZATIONS PAGE -->
 	<div id="viz" style="display:initial">
 		<h1>Visualizations of your data</h1>
+		<hr>
 		<h3>Here is your graph report for the month of October</h3>
 		<div id="graph" style="height:0;width:80%;padding-bottom:20%;background-color:red">
 			<h4>ERROR: Could not load graph</h4>

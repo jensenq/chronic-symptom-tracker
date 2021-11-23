@@ -33,6 +33,8 @@ a:hover {
   opacity: 0.7;
   -webkit-transition: .2s;
   transition: opacity .2s;
+  fill: #56BD66;
+  stroke: none;
 }
 
 .slider:hover {
@@ -51,6 +53,7 @@ a:hover {
     font-size: 30px;
 }
 
+
 .container-form
 {
     text-align: center;
@@ -68,6 +71,34 @@ a:hover {
     font-size: 20px;
 }
 
+.calendar
+{
+	
+}
+
+.calendar h3
+{
+	text-align: center;
+}
+.calendar table, .calendar th, .calendar td, .calendar tr
+{
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+.calendar td, .calendar tr
+{
+	text-align: center;
+	transition: 0.3s;
+}
+
+.calendar td.active, .calendar td:hover
+{
+	background-color: aqua;
+	color: #262626;
+	cursor: pointer;
+}
+
 textarea
 {
     resize: none;
@@ -75,17 +106,17 @@ textarea
 
 #home
 {
-
+	text-align: center;
 }
 
 #symptoms
 {
-
+	text-align: center;
 }
 
 #entry
 {
-
+	text-align: center;
 }
 
 #profile
@@ -111,9 +142,21 @@ textarea
 
 }
 
+#milestones h1
+{
+	text-align: center;
+}
+
 .clear
 {
 	clear: both;
+}
+
+#graph
+{
+	text-align: center;
+	padding-top: 50px;
+	padding-bottom: 50px;
 }
 
 #line-graph

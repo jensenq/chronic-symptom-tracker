@@ -24,6 +24,7 @@
 		<button id="home_to_symptoms"   > MAKE AN ENTRY </button>
 		<button id="home_to_profile"    > PROFILE </button>
 		<button id="home_to_milestones" > MILESTONES </button>
+		<button id="home_to_viz" > VISUALIZATION </button>
 	<br><hr><br>
 	</div>
 	
@@ -101,6 +102,8 @@
 		<p>Address:</p>
 		<p>Phone Number:</p>
 		<p>Medication:</p>
+		<button id="profile_to_home" > HOME </button>
+		<button id="profile_to_edit" > EDIT PROFILE </button>
 	<br><hr><br>
 	</div>
 	<div class="clear"></div>
@@ -142,13 +145,26 @@
 	<!-- 5. MILESTONES PAGE -->
 	<div id="milestones" style="display:initial">
 		<h1>Milestones</h1>
-	<br><hr><br>
+		<h3>You have currently logged in for 5 days.</h3>
+		<h3>Log in 2 more days and you'll unlock the dancing cat gif!</h3>
+		<h4>Current Milestone Unlocks:</h4>
+		<ul>
+			<li>Account created! All features are unlocked!</li>
+			<li>You created your first journal entry!</li>
+			<li>You created your first custom symptom!</li>
+		</ul>
+		<button id="milestones_to_home" > HOME </button>
 	</div>
 	
 	
 	<!-- 6. VISUALIZATIONS PAGE -->
 	<div id="viz" style="display:initial">
 		<h1>Visualizations of your data</h1>
+		<h3>Here is your graph report for the month of October</h3>
+		<div id="graph" style="height:0;width:80%;padding-bottom:20%;background-color:red">
+			<h4>ERROR: Could not load graph</h4>
+		</div>
+		<button id="viz_to_home" > HOME </button>
 	</div>
 
 

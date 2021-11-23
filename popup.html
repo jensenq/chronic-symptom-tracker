@@ -13,72 +13,14 @@
 
 	<!-- 1. HOME PAGE -->
 	<div id="home" style="display:initial">
-		<div class="calendar">
-			<h1>Welcome to Chronic Symptom Tracker</h1>
-			<table>
-				<tr>
-					<th>Sunday</th>
-					<th>Monday</th>
-					<th>Tuesday</th>
-					<th>Wednesday</th>
-					<th>Thursday</th>
-					<th>Friday</th>
-					<th>Saturday</th>
-				</tr>
-				<tr>
-					<td></td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-				</tr>
-				<tr>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-					<td>10</td>
-					<td>11</td>
-					<td>12</td>
-					<td>13</td>
-				</tr>
-				<tr>
-					<td>14</td>
-					<td>15</td>
-					<td>16</td>
-					<td>17</td>
-					<td>18</td>
-					<td>19</td>
-					<td>20</td>
-				</tr>
-				<tr>
-					<td>21</td>
-					<td>22</td>
-					<td>23</td>
-					<td>24</td>
-					<td>25</td>
-					<td>26</td>
-					<td>27</td>
-				</tr>
-				<tr>
-					<td>28</td>
-					<td>29</td>
-					<td>30</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-			</table>
-		</div>
-		
-		<button id="home_to_symptoms"> MAKE AN ENTRY </button>
-		<button id="home_to_profile"> PROFILE </button>
-		<button id="home_to_milestones"> MILESTONES </button>
+		<h1>Welcome to Chronic Symptom Tracker</h1>
+		<div id="calendar" style="height:0;width:20%;padding-bottom:20%;background-color:red"> calendar </div>
+		<button id="home_to_symptoms"   > MAKE AN ENTRY </button>
+		<button id="home_to_profile"    > PROFILE </button>
+		<button id="home_to_milestones" > MILESTONES </button>
+	<br><hr><br>
 	</div>
 	
-	<br><hr><br>
 
 	<!-- 2. SYMPTOMS PAGE -->
 	<div id="symptoms" style="display:initial">
@@ -90,36 +32,35 @@
 			
 			<!-- ************ ACCORDIAN ************ -->
 			<div class="panel panel-success">
-					<div class="panel-header with-border">
-						<h2 class="panel-title text-center">Symptoms</h2>
-					</div>
-					<!-- /.panel-header -->
-					<!-- form start -->
-					<form class="form-horizontal">
-						<div class="panel-body">
-						
-								<div class="panel-group" id="accordion" role="tablist"
-									aria-multiselectable="true">
-								</div>
-								
-								<div class="col-md-12 text-center" style="margin-top:15px;">
-									<button class="btn btn-success" id="addButton" value="">
-										<span class="glyphicon glyphicon-plus">
-										</span> Add </button>
-								</div>
-			
+				<div class="panel-header with-border">
+					<h2 class="panel-title text-center">Symptoms</h2>
+				</div>
+				<!-- /.panel-header -->
+				<!-- form start -->
+				<form class="form-horizontal">
+					<div class="panel-body">
+					
+							<div class="panel-group" id="accordion" role="tablist"
+								aria-multiselectable="true">
+							</div>
 							
-						</div>
-						<!-- /.panel-body -->
-						<div class="panel-footer">
-							<div class="col-sm-offset-3 col-sm-6 text-center">
-								
+							<div class="col-md-12 text-center" style="margin-top:15px;">
+								<button class="btn btn-success" id="addButton" value="">
+									<span class="glyphicon glyphicon-plus">
+									</span> Add </button>
 							</div>
 			
+						
+					</div>
+					<!-- /.panel-body -->
+					<div class="panel-footer">
+						<div class="col-sm-offset-3 col-sm-6 text-center">
+							
 						</div>
-						<!-- /.box-footer -->
-					</form>
-				</div>
+			
+					</div>
+					<!-- /.box-footer -->
+				</form>
 			</div>
 			<!-- ************ ACCORDIAN ************ -->
 
@@ -127,9 +68,9 @@
 
 			<button type="submit" id="symptoms_to_journal">Next</button>
 		</form>
+	<br><hr><br>
 	</div>
 	
-	<br><hr><br>
 
 	<!-- 3. JOURNAL PAGE -->
 	<div id="journal" style="display:initial">
@@ -139,9 +80,9 @@
 			<textarea id = "journal_text" name = "jEntry" rows = "4" cols = "50" placeholder="Enter your thoughts here..."></textarea><br>
 			<button type="submit" id="journal_to_home">Submit</button>
 		</form>
+	<br><hr><br>
 	</div>
 
-	<br><hr><br>
 	
 	<!-- 4. PROFILE PAGE -->
 	<div id="profile" style="display:initial">
@@ -154,38 +95,60 @@
 		<p>Address:</p>
 		<p>Phone Number:</p>
 		<p>Medication:</p>
+	<br><hr><br>
 	</div>
 	<div class="clear"></div>
 
-	<br><hr><br>
+	<!-- 4.5. "CREATE PROFILE" PAGE -->
+        <div id="create_profile" style="display:initial">
+                <h1>Create Profile</h1>
+                <form id="profile_form">
+                        First Name :
+                        <input type="text" id="first_name">
+                        <br>
+                        Last Name :
+                        <input type="text" id="last_name">
+                        <br>
+                        Date of Birth :
+                        <input type="date" id="dob">
+                        <br>
+                        Street Address :
+                        <input type="text" id="address">
+                        <br>
+                        Phone Number (X-XXX-XXX-XXXX) :
+                        <input type="text" id="phone_number">
+                        <br>
+                        Healthcare Provider :
+                        <input type="text" id="healthcare_provider">
+                        <br>
+                        Medications(comma seperated) :
+                        <input type="text" id="medications">
+                        <br>
+                        <input type="submit">
 
+
+
+                </form>
+        <br><hr><br>
+        </div>
+	
+	
 	<!-- 5. MILESTONES PAGE -->
 	<div id="milestones" style="display:initial">
 		<h1>Milestones</h1>
-		<h3>You have currently logged in for 5 days.</h3>
-		<h3>Log in 2 more days and you'll unlock the dancing cat gif!</h3>
-		<h4>Current Milestone Unlocks:</h4>
-		<ul>
-			<li>Account created! All features are unlocked!</li>
-			<li>You created your first journal entry!</li>
-			<li>You created your first custom symptom!</li>
-		</ul>
+	<br><hr><br>
 	</div>
 	
-	<br><hr><br>
 	
 	<!-- 6. VISUALIZATIONS PAGE -->
 	<div id="viz" style="display:initial">
 		<h1>Visualizations of your data</h1>
-		<h3>Here is your graph report for the month of October</h3>
-		<div id="graph" style="height:0;width:80%;padding-bottom:20%;background-color:red">
-			<h4>ERROR: Could not load graph</h4>
-		</div>
 	</div>
 
 
 
 </div>
+<script src="js/notification.js"></script>
 <script src="js/jquery-3.6.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/foreground.js"></script> <!-- do not move. this script must be ran after all DOM content has been loaded -->

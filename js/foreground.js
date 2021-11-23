@@ -1,18 +1,39 @@
 
-/* implementation idea: "changes page" by setting all 
- * other page's div's to display:none
- * it might make things easier if we wrap it all in a <ul>,
- * with each page's div as an item inside this list
- *
- * then to use this function for a button: 
- * let button = document.getElementById("my_cool_button")
- * button.addEventListener('click', changePage);
- * 
-function changePage(target_page){
+/* add click listeners for buttons to change page */
+window.onload = function(){
+	changePage("home"); 
+	document.getElementById("home_to_symptoms").addEventListener('click', function(){
+	    changePage("symptoms")
+	});
+	document.getElementById("home_to_profile").addEventListener('click', function(){
+	    changePage("profile")
+	});
+	document.getElementById("home_to_milestones").addEventListener('click', function(){
+	    changePage("milestones")
+	});
+	document.getElementById('symptoms_form').addEventListener('submit', saveSymptomsForm);
+	document.getElementById('journal_form').addEventListener('submit', saveJournalForm)
+	document.getElementById("symptoms_to_journal").addEventListener('click', function(){
+	    changePage("journal")
+	});
+	document.getElementById("journal_to_home").addEventListener('click', function(){
+	    changePage("home")
+	});
 }
+
+
+/* "changes page" by setting all 
+ * other page's div's to display:none
  */
-
-
+function changePage(target_page){
+	var page_ids = ["home", "symptoms", "journal", "profile", "create_profile", "milestones", "viz"]
+	for (const page_id of page_ids) {
+		if (page_id != target_page){
+			document.getElementById(page_id).style.display = 'none';
+		}
+	}
+	document.getElementById(target_page).style.display = 'block';
+}
 
 /* Symptoms page
  * upon submit, get all values in the accordian and change page to Journal
@@ -24,8 +45,6 @@ function saveSymptomsForm(event){
 	// jquery might help, groan
 	changePage("journal")
 }
-let symptoms_form = document.getElementById('symptoms_form')
-symptoms_form.addEventListener('submit', saveSymptomsForm);
 
 
 
@@ -41,8 +60,6 @@ function saveJournalForm(event){
 	chrome.storage.sync.set({ text });
 	changePage("home")	
 }
-let journal_form = document.getElementById('journal_form')
-journal_form.addEventListener('submit', saveJournalForm)
 
 
 /* accordian logic */

@@ -78,32 +78,9 @@ textarea
 
 }
 
-.calendar
-{
-
-}
-.calendar table, .calendar th, .calendar td, .calendar tr
-{
-	border: 1px solid black;
-	border-collapse: collapse;
-}
-
-.calendar td, .calendar tr
-{
-	text-align: center;
-	transition: 0.3s;
-}
-
-.calendar td.active, .calendar td:hover
-{
-	background-color: aqua;
-	color: #262626;
-	cursor: pointer;
-}
-
 #symptoms
 {
-	
+
 }
 
 #entry
@@ -134,12 +111,6 @@ textarea
 
 }
 
-#graph
-{
-	text-align: center;
-	padding-top: 50px;
-	padding-bottom: 50px;
-}
 .clear
 {
 	clear: both;

@@ -9,22 +9,32 @@
 </head>
 
 <body>
+	<h1 class="text-primary mt-0 text-center">Chronic Symptom Tracker</h1>
+		<ul class="nav nav-pills justify-content-center  nav-justified border-bottom">
+			<li class="nav-item">
+				<a class="nav-link" id="home_to_profile" >PROFILE</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link bg-primary" id="home_to_symptoms">MAKE AN ENTRY</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="home_to_milestones">MILESTONES</a>
+			</li>		
+		</ul>
 <div id="container">
-
+	
 	<!-- 1. HOME PAGE -->
-	<div id="home" style="display:initial">
-		<h1>Welcome to Chronic Symptom Tracker</h1>
-		<div id="calendar" style="height:0;width:20%;padding-bottom:20%;background-color:red"> calendar </div>
-		<button id="home_to_symptoms"> MAKE AN ENTRY </button>
-		<button id="home_to_profile"> PROFILE </button>
-		<button id="home_to_milestones"> MILESTONES </button>
+	<div id="home" style="display:initial" class="bg-light m-5">
+		<div class="wrapper">
+			<div id="calendar"></div>
+			<div id="calendar_data"></div>
+		</div>
 	</div>
 	
 	<br><hr><br>
 
 	<!-- 2. SYMPTOMS PAGE -->
 	<div id="symptoms" style="display:initial">
-
 		<form id="symptoms_form">
 
 			<label for="overall_slider">How are you feeling overall?</label><br>
@@ -67,7 +77,7 @@
 
 
 
-			<button type="submit" id="symptoms_to_journal">Next</button>
+			<button type="submit" id="symptoms_to_journal" class="btn btn-primary fw-bold">Next</button>
 		</form>
 	</div>
 	
@@ -76,10 +86,10 @@
 	<!-- 3. JOURNAL PAGE -->
 	<div id="journal" style="display:initial">
 		<!-- todo: date -->
-		<h1>Write Down Your Thoughts</h1>
-	   <form id="journal_form">
+		<h2 class="text-secondary mt-0 text-center">Write Down Your Thoughts</h2>
+	   <form id="journal_form" class="center d-flex">
 			<textarea id = "journal_text" name = "jEntry" rows = "4" cols = "50" placeholder="Enter your thoughts here..."></textarea><br>
-			<button type="submit" id="journal_to_home">Submit</button>
+			<button type="submit" id="journal_to_home" class="btn btn-primary">Submit</button>
 		</form>
 	</div>
 
@@ -87,10 +97,9 @@
 	
 	<!-- 4. PROFILE PAGE -->
 	<div id="profile" style="display:initial">
-		<h1>Your Profile</h1>
-		<div id="profile-picture">
-			<h4>Your picture here</h4>
-		</div>
+		<nav class="navigationBar"></nav>
+		<h2 class="text-secondary mt-0 text-center">Your Profile</h2>
+			<img class="rounded float-start"  src=https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80/>
 		<p>Name:</p>
 		<p>DOB:</p>
 		<p>Address:</p>
@@ -100,58 +109,27 @@
 	<div class="clear"></div>
 
 	<br><hr><br>
-	<!-- 4.5. "CREATE PROFILE" PAGE -->
-        <div id="create_profile" style="display:initial">
-                <h1>Create Profile</h1>
-                <form id="profile_form">
-                        First Name :
-                        <input type="text" id="first_name">
-                        <br>
-                        Last Name :
-                        <input type="text" id="last_name">
-                        <br>
-                        Date of Birth :
-                        <input type="date" id="dob">
-                        <br>
-                        Street Address :
-                        <input type="text" id="address">
-                        <br>
-                        Phone Number (X-XXX-XXX-XXXX) :
-                        <input type="text" id="phone_number">
-                        <br>
-                        Healthcare Provider :
-                        <input type="text" id="healthcare_provider">
-                        <br>
-                        Medications(comma seperated) :
-                        <input type="text" id="medications">
-                        <br>
-                        <input type="submit">
 
-
-
-                </form>
-        </div>
-	
-        <br><hr><br>
-	
 	<!-- 5. MILESTONES PAGE -->
 	<div id="milestones" style="display:initial">
-		<h1>Milestones</h1>
+		<nav class="navigationBar"></nav>
+		<h2 class="text-secondary mt-0 text-center">Milestones</h2>
 	</div>
 	
 	<br><hr><br>
 	
 	<!-- 6. VISUALIZATIONS PAGE -->
 	<div id="viz" style="display:initial">
-		<h1>Visualizations of your data</h1>
+		<h2 class="text-secondary mt-0 text-center">Visualizations of your data</h2>
 	</div>
 
 
 
 </div>
-<script src="js/notification.js"></script>
+
 <script src="js/jquery-3.6.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/foreground.js"></script> <!-- do not move. this script must be ran after all DOM content has been loaded -->
+<script src="js/calendar.js"></script>
 </body>
 </html>

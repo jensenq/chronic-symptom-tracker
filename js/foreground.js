@@ -1,25 +1,45 @@
 
-/* add click listeners for buttons to change page */
+/* all startup tasks here */
 window.onload = function(){
 	changePage("home"); 
-	document.getElementById("home_to_symptoms").addEventListener('click', function(){
-	    changePage("symptoms")
-	});
-	document.getElementById("home_to_profile").addEventListener('click', function(){
-	    changePage("profile")
-	});
-	document.getElementById("home_to_milestones").addEventListener('click', function(){
-	    changePage("milestones")
-	});
-	document.getElementById('symptoms_form').addEventListener('submit', saveSymptomsForm);
-	document.getElementById('journal_form').addEventListener('submit', saveJournalForm)
-	document.getElementById("symptoms_to_journal").addEventListener('click', function(){
-	    changePage("journal")
-	});
-	document.getElementById("journal_to_home").addEventListener('click', function(){
-	    changePage("home")
+	setChangePageEvents();
+	initCalHeatmap();
+}
+
+function initCalHeatmap(){
+	var cal = new CalHeatMap();
+	cal.init({
+		itemSelector: "#cal-heatmap",
+		domain: "month",
+		subDomain: "x_day",
+		data: "datas-years.json",
+		start: new Date(2000, 0, 5),
+		cellSize: 20,
+		cellPadding: 5,
+		domainGutter: 20,
+		range: 2,
+		domainDynamicDimension: false,
+		previousSelector: "#prev_month",
+		nextSelector: "#next_month",
+		domainLabelFormat: function(date) {
+			moment.lang("en");
+			return moment(date).format("MMMM").toUpperCase();
+		},
+		subDomainTextFormat: "%d",
+		legend: [20, 40, 60, 80]
 	});
 }
+
+function setChangePageEvents(){
+	document.getElementById("home_to_symptoms")   .addEventListener('click', function(){changePage("symptoms")});
+	document.getElementById("home_to_profile")    .addEventListener('click', function(){changePage("profile")});
+	document.getElementById("home_to_milestones") .addEventListener('click', function(){changePage("milestones")});
+	document.getElementById("symptoms_to_journal").addEventListener('click', function(){changePage("journal")});
+	document.getElementById("journal_to_home")    .addEventListener('click', function(){changePage("home") });
+	document.getElementById('symptoms_form')      .addEventListener('submit', saveSymptomsForm);
+	document.getElementById('journal_form')       .addEventListener('submit', saveJournalForm)
+}
+
 
 
 /* "changes page" by setting all 
@@ -34,6 +54,8 @@ function changePage(target_page){
 	}
 	document.getElementById(target_page).style.display = 'block';
 }
+
+
 
 /* Symptoms page
  * upon submit, get all values in the accordian and change page to Journal
@@ -60,6 +82,7 @@ function saveJournalForm(event){
 	chrome.storage.sync.set({ text });
 	changePage("home")	
 }
+
 
 
 /* accordian logic */

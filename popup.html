@@ -6,6 +6,7 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="css/style.css" type="text/css">
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="js/cal-heatmap-master/cal-heatmap.css" />
 </head>
 
 <body>
@@ -14,7 +15,12 @@
 	<!-- 1. HOME PAGE -->
 	<div id="home" style="display:initial">
 		<h1>Welcome to Chronic Symptom Tracker</h1>
-		<div id="calendar" style="height:0;width:20%;padding-bottom:20%;background-color:red"> calendar </div>
+
+		<div id="calendar">
+		<button id="prev_month"> &lt  </button>
+		<button id="next_month"> &gt  </button>
+			<div id="cal-heatmap"></div>
+		</div>
 		<button id="home_to_symptoms"   > MAKE AN ENTRY </button>
 		<button id="home_to_profile"    > PROFILE </button>
 		<button id="home_to_milestones" > MILESTONES </button>
@@ -148,6 +154,9 @@
 
 
 </div>
+<script src="js/d3.min.js"></script>
+<script src="js/moment.min.js"></script>
+<script type="text/javascript" src="js/cal-heatmap-master/cal-heatmap.min.js"></script>
 <script src="js/notification.js"></script>
 <script src="js/jquery-3.6.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

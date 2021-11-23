@@ -7,37 +7,49 @@ window.onload = function(){
 }
 
 function initCalHeatmap(){
+
+	document.getElementById("year").innerHTML = new Date().getFullYear();
+
 	var cal = new CalHeatMap();
+	var now = new Date(3600000*Math.floor(Date.now()/3600000));
+
 	cal.init({
 		itemSelector: "#cal-heatmap",
 		domain: "month",
 		subDomain: "x_day",
-		data: "datas-years.json",
-		start: new Date(2000, 0, 5),
+		data: "../data/test_entries.json", // todo: why isnt this right?
+		//afterLoadData: parse_entry_data,
+		start: now,
 		cellSize: 20,
 		cellPadding: 5,
 		domainGutter: 20,
-		range: 2,
+		range: 1,
 		domainDynamicDimension: false,
 		previousSelector: "#prev_month",
 		nextSelector: "#next_month",
 		domainLabelFormat: function(date) {
-			moment.lang("en");
+			moment.locale("en");
 			return moment(date).format("MMMM").toUpperCase();
 		},
 		subDomainTextFormat: "%d",
-		legend: [20, 40, 60, 80]
+		weekStartOnMonday: false,
+		highlight: ["now"],
+		displayLegend: false
 	});
 }
 
-function setChangePageEvents(){
-	document.getElementById("home_to_symptoms")   .addEventListener('click', function(){changePage("symptoms")});
-	document.getElementById("home_to_profile")    .addEventListener('click', function(){changePage("profile")});
-	document.getElementById("home_to_milestones") .addEventListener('click', function(){changePage("milestones")});
-	document.getElementById("symptoms_to_journal").addEventListener('click', function(){changePage("journal")});
-	document.getElementById("journal_to_home")    .addEventListener('click', function(){changePage("home") });
-	document.getElementById('symptoms_form')      .addEventListener('submit', saveSymptomsForm);
-	document.getElementById('journal_form')       .addEventListener('submit', saveJournalForm)
+var parse_entry_data = function(data){
+	var stats = {};
+	for (var d in data) {
+		console.log(d + " | " + data[d])
+		stats[data[d].date] = data[d].value;
+	}
+	return stats;
+}
+
+function cal_onclick(date, value){
+	console.log("Date: " + date + "\nValue: " +
+			(value === null ? "unknown" : value));
 }
 
 
@@ -55,6 +67,15 @@ function changePage(target_page){
 	document.getElementById(target_page).style.display = 'block';
 }
 
+function setChangePageEvents(){
+	document.getElementById("home_to_symptoms")   .addEventListener('click', function(){changePage("symptoms")});
+	document.getElementById("home_to_profile")    .addEventListener('click', function(){changePage("profile")});
+	document.getElementById("home_to_milestones") .addEventListener('click', function(){changePage("milestones")});
+	document.getElementById("symptoms_to_journal").addEventListener('click', function(){changePage("journal")});
+	document.getElementById("journal_to_home")    .addEventListener('click', function(){changePage("home") });
+	document.getElementById('symptoms_form')      .addEventListener('submit', saveSymptomsForm);
+	document.getElementById('journal_form')       .addEventListener('submit', saveJournalForm)
+}
 
 
 /* Symptoms page

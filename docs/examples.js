@@ -2,6 +2,16 @@
  * use this to save examples of code snippets for later reference
  */
 
+/* 
+		//afterLoadData: parse_entry_data(),
+function parse_entry_data(data){
+
+	for (var entry in data) {
+		var date  = data[entry].date;
+		var value = data[entry].value;
+	}
+}
+*/
 
 /****************************************************************/
 

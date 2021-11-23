@@ -8,8 +8,20 @@ window.onload = function(){
 	document.getElementById("home_to_profile").addEventListener('click', function(){
 	    changePage("profile")
 	});
+	document.getElementById("profile_to_edit").addEventListener('click', function(){
+	    changePage("create_profile")
+	});
+	document.getElementById("profile_to_home").addEventListener('click', function(){
+	    changePage("home")
+	});
 	document.getElementById("home_to_milestones").addEventListener('click', function(){
 	    changePage("milestones")
+	});
+	document.getElementById("milestones_to_home").addEventListener('click', function(){
+	    changePage("home")
+	});
+	document.getElementById("home_to_viz").addEventListener('click', function(){
+		changePage("viz")
 	});
 	document.getElementById('symptoms_form').addEventListener('submit', saveSymptomsForm);
 	document.getElementById('journal_form').addEventListener('submit', saveJournalForm)
@@ -17,6 +29,9 @@ window.onload = function(){
 	    changePage("journal")
 	});
 	document.getElementById("journal_to_home").addEventListener('click', function(){
+	    changePage("home")
+	});
+	document.getElementById("viz_to_home").addEventListener('click', function(){
 	    changePage("home")
 	});
 }

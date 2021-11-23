@@ -11,7 +11,7 @@ html {
 html,
 body {
 	width:  600px;
-	height: 600px;
+	height: 400px;
 	margin: 0;
 	padding: 0;
 	color: #fff;
@@ -27,14 +27,22 @@ a:hover {
 	text-decoration: underline;
 }
 
+hr
+{
+	color: #262626;
+	background-color: #262626;
+}
 /* ******* */
 
 .slider {
   opacity: 0.7;
   -webkit-transition: .2s;
   transition: opacity .2s;
-  fill: #56BD66;
-  stroke: none;
+}
+
+.slider .track
+{
+	background-color: #dd4b39;
 }
 
 .slider:hover {
@@ -71,33 +79,11 @@ a:hover {
     font-size: 20px;
 }
 
-.calendar
+#calendar
 {
-	
+	background-color: #fce7b0;
 }
 
-.calendar h3
-{
-	text-align: center;
-}
-.calendar table, .calendar th, .calendar td, .calendar tr
-{
-	border: 1px solid black;
-	border-collapse: collapse;
-}
-
-.calendar td, .calendar tr
-{
-	text-align: center;
-	transition: 0.3s;
-}
-
-.calendar td.active, .calendar td:hover
-{
-	background-color: aqua;
-	color: #262626;
-	cursor: pointer;
-}
 
 textarea
 {
@@ -107,6 +93,7 @@ textarea
 #home
 {
 	text-align: center;
+	background-color: #ade0ff;
 }
 
 #symptoms

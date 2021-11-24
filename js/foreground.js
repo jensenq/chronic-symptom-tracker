@@ -73,20 +73,58 @@ function setChangePageEvents(){
 	document.getElementById("home_to_milestones") .addEventListener('click', function(){changePage("milestones")});
 	document.getElementById("symptoms_to_journal").addEventListener('click', function(){changePage("journal")});
 	document.getElementById("journal_to_home")    .addEventListener('click', function(){changePage("home") });
-	document.getElementById('symptoms_form')      .addEventListener('submit', saveSymptomsForm);
+	document.getElementById('symptoms_form')      .addEventListener('submit', saveEntryData);
 	document.getElementById('journal_form')       .addEventListener('submit', saveJournalForm)
+
+	// bandaid, would prefer 1 button.
+	document.getElementById("save_symptoms")      .addEventListener('click', function(){saveEntryData() });
+
+}
+
+/* gets data from html and records all symptom/descriptor:intensity pairs in a dictionary.
+ * this is then stored, keyed by the date in YYYYMMDD format (eg: nov 11th 2021 -> 20211124) 
+ * this data can later be accessed with chrome.storage.sync.get(['20211124'] ...)
+ */
+	function saveEntryData(){
+
+	var overall_slider = document.getElementById("overall_slider");
+	var symptom_titles  = document.getElementsByClassName("symptom_title");
+	var symptom_sliders = document.getElementsByClassName("symptom_slider");
+	var descriptor_titles  = document.getElementsByClassName("descriptor_title");
+	var descriptor_sliders = document.getElementsByClassName("descriptor_slider");
+
+	var entry_dict = {};
+	entry_dict["overall"] = overall_slider.value;
+
+	for (var i=0; i<symptom_titles.length; i++){
+		var symptom = symptom_titles[i].innerText.replace(/\s/g, "")
+		var intensity = symptom_sliders[i].value;
+		entry_dict[symptom] = intensity;
+	}
+	for (var i=0; i<descriptor_titles.length; i++){
+		var descriptor = descriptor_titles[i].innerText.replace(/\s/g, "") 
+		var intensity = descriptor_sliders[i].value;
+		entry_dict[descriptor] = intensity;
+	}
+
+	var todays_date = (new Date()).toISOString().slice(0,10).replace(/-/g,"").toString()
+	chrome.storage.sync.set({todays_date : entry_dict});
 }
 
 
-/* Symptoms page
- * upon submit, get all values in the accordian and change page to Journal
- */
-function saveSymptomsForm(event){
-	event.preventDefault();
-	
-	// scraping a dynamic list might be a pain in the ass
-	// jquery might help, groan
-	changePage("journal")
+function saveSymptomsHierarchy(){
+
+	var symptom_titles  = document.getElementsByClassName("symptom_title");
+	var descriptor_titles  = document.getElementsByClassName("descriptor_title");
+
+	for (var i=0; i<symptom_titles.length; i++){
+		console.log("symptom: " + symptom_titles[i].innerText.replace(/\s/g, "") );
+	}
+
+	for (var i=0; i<descriptor_titles.length; i++){
+		console.log("descriptor: " + descriptor_titles[i].innerText.replace(/\s/g, "") );
+
+	}
 }
 
 
@@ -128,10 +166,9 @@ $(document).ready(function(){
 				}
 				$(wrapper).append('<div class="col-sm-12" style="margin-bottom: 0;"><div class="panel panel-default" id="panel'+ counter +'">' + 
 				'<div class="panel-heading" role="tab" id="heading'+ counter +'"><h4 class="panel-title">' +
-				'<a class="'+collapsedClass+'" id="panel-lebel'+ counter +'" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+ counter +'" ' +
+				'<a class="symptom_title '+collapsedClass+'" id="panel-lebel'+ counter +'" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+ counter +'" ' +
 				'aria-expanded="'+ariaExpanded+'" aria-controls="collapse'+ counter +'"> '+catgName+
-				'<input  type="range"    id="example_slider" class="slider" min="1" max="100" value="50"><br>'+
-				' </a><div class="actions_div" style="position: relative; top: -26px;">' +
+				'<input  type="range" class="slider symptom_slider" min="1" max="100" value="50"><br>'+' </a><div class="actions_div" style="position: relative; top: -26px;">' +
 				'<a href="#" accesskey="'+ counter +'" class="remove_ctg_panel exit-btn pull-right"><span class="glyphicon glyphicon-remove"></span></a>' +
 				'<a href="#" accesskey="'+ counter +'" class="edit_ctg_label pull-right"><span class="glyphicon glyphicon-edit "></span> Edit</a>' +
 				'<a href="#" accesskey="'+ counter +'" class="pull-right" id="addButton2"> <span class="glyphicon glyphicon-plus"></span> Add descriptors </a></div></h4></div>');
@@ -156,10 +193,9 @@ $(document).ready(function(){
 			
 				$(wrapper).find(parentPanel).append('<div class="col-sm-12" style="margin-bottom: 0;"><div class="panel panel-default" id="panel'+counter+'">' + 
 				'<div class="panel-heading" role="tab" id="heading'+counter+'"><h4 class="panel-title">' +
-				'<a class="'+collapsedClass+'" id="panel-lebel'+ counter +'" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+ counter+'" ' +
+				'<a class="descriptor_title '+collapsedClass+'" id="panel-lebel'+ counter +'" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+ counter+'" ' +
 				'aria-expanded="'+ariaExpanded+'" aria-controls="collapse'+ counter+'"> '+catgName+
-				'<input  type="range"    id="example_slider" class="slider" min="1" max="100" value="50"><br>'+
-				' </a><div class="actions_div" style="position: relative; top: -26px;">' +
+				'<input  type="range" class="slider descriptor_slider" min="1" max="100" value="50"><br>'+' </a><div class="actions_div" style="position: relative; top: -26px;">' +
 				'<a href="#" accesskey="'+counter +'" class="remove_ctg_panel exit-btn pull-right"><span class="glyphicon glyphicon-remove"></span></a>' +
 				'<a href="#" accesskey="'+ counter +'" class="edit_ctg_label pull-right"><span class="glyphicon glyphicon-edit"></span> Edit</a>' +
 				'<a href="#" accesskey="'+ counter +'" class="pull-right" id="addButton2">  </a></h4></div>');

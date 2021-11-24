@@ -38,7 +38,7 @@
 		<form id="symptoms_form">
 
 			<label for="overall_slider">How are you feeling overall?</label><br>
-			<input type="range" width= id="overall_slider" class="slider" min="1" max="100" value="50">
+			<input type="range" id="overall_slider" class="slider" min="1" max="100" value="50">
 			
 			<!-- ************ ACCORDIAN ************ -->
 			<div class="panel panel-success">
@@ -74,8 +74,9 @@
 			</div>
 			<!-- ************ ACCORDIAN ************ -->
 
+	<!-- todo: make the submit button labeled "Next" be able to just call saveSymptomsForm. this is a bandaid. -->
 
-
+			<button id="save_symptoms">Save</button>
 			<button type="submit" id="symptoms_to_journal">Next</button>
 		</form>
 	<br><hr><br>

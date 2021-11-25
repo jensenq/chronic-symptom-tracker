@@ -54,6 +54,7 @@ function cal_onclick(date, value){
 
 
 /* "changes page" by setting all 
+
  * other page's div's to display:none
  */
 function changePage(target_page){
@@ -118,7 +119,30 @@ function saveJournalForm(event){
 
 	// todo: save data alongside date/time
 	chrome.storage.sync.set({ text });
+	//milestone 2: keep track of number of journal entries
+	entryCounter();
 	changePage("home")	
+}
+
+let journal_form = document.getElementById('journal_form')
+journal_form.addEventListener('submit', saveJournalForm)
+
+
+/* increases the counter keeping track of number of jounral entries by 1
+*/
+function entryCounter(){
+	var counter = 0;
+
+
+	chrome.storage.sync.get('totalEntries', function(result){
+			counter = result.totalEntries;
+			counter ++;
+			console.log("parsed");
+			console.log(counter);
+			chrome.storage.sync.set({"totalEntries" : counter}, function(){
+			});
+	});
+	
 }
 
 

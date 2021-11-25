@@ -1,0 +1,106 @@
+ body
+ {
+     position: relative;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100vh;
+     font-family: sans-serif;
+     background: url(../images/The\ One\ Ring.jpg) no-repeat center/cover;
+     overflow: hidden;
+ }
+
+ body::before
+ {
+     content: "";
+     width: 102vw;
+     position: absolute;
+     top: -100px;
+     left: -20px;
+     bottom: 0;
+     right: 0;
+     filter: blur(10px);
+     background: inherit;
+ }
+
+ .calendar{
+     position: absolute;
+     width: 300px;
+     background-color: white;
+     box-sizing: border-box;
+     box-shadow: 0 5px 50px rgba(0,0,0,0.5);
+     border-radius: 8px;
+     overflow: hidden;
+     transform: scale(1.5);
+ }
+
+ .calendar-picture{
+     position: relative;
+     height: 200px;
+     padding: 20px;
+     color: white;
+     background: #262626 url(../images/The\ One\ Ring.jpg) no-repeat center/cover;
+     text-shadow: 0 2px 2px rgba(0,0,0,0.2);
+     box-sizing: border-box;
+ }
+
+ .calendar-picture::before{
+     content: "";
+     left: 0;
+     right: 0;
+     top: 0;
+     bottom: 0;
+     position: absolute;
+     background: linear-gradient(to top, rgba(0,0,0,0.25), rgba(0,0,0,0.1));
+ }
+
+ .calendar-picture h2{
+     margin: 0;
+ }
+
+ .calendar-picture h3{
+     margin: 0;
+     font-weight: 500;
+ }
+
+ .calendar_date{
+     padding: 20px;
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
+     grid-gap: 10px;
+     box-sizing: border-box;
+ }
+
+ .calendar_day{
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     height: 25px;
+     font-weight: 600;
+     color: #262626;
+ }
+
+ .calendar_day:nth-child(7){
+     color: #ff685d;
+ }
+
+ .calendar_number{
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     height: 25px;
+     color: #262626;
+ }
+
+ .calendar_number:nth-child(7n){
+     color: #ff685d;
+     font-weight: 700;
+ }
+
+ .calendar_number--current,
+ .calendar_number:hover{
+     background-color: #009688;
+     color: #fff !important;
+     font-weight: 700;
+     cursor: pointer;
+ }

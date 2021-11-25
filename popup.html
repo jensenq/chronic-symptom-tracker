@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -6,37 +7,50 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="css/style.css" type="text/css">
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+	<script src="https://d3js.org/d3.v6.js"></script>
 </head>
 
 <body>
-<div id="container">
 
-	<!-- 1. HOME PAGE -->
-	<div id="home" style="display:initial">
-		<h1>Welcome to Chronic Symptom Tracker</h1>
-		<div id="calendar" style="height:0;width:20%;padding-bottom:20%;background-color:red"> calendar </div>
-		<button id="home_to_symptoms"> MAKE AN ENTRY </button>
-		<button id="home_to_profile"> PROFILE </button>
-		<button id="home_to_milestones"> MILESTONES </button>
-		<button id="home_to_symptoms"   > MAKE AN ENTRY </button>
-		<button id="home_to_profile"    > PROFILE </button>
-		<button id="home_to_create_profile"  > CREATE PROFILE </button>
-		<button id="home_to_milestones" > MILESTONES </button>
-	<br><hr><br>
-	</div>
-	
-	<br><hr><br>
+	<h1 class="text-primary mt-0 text-center">Chronic Symptom Tracker</h1>
+	<ul class="nav nav-pills justify-content-center   border-bottom m-auto"
+	style="width: 100%; display:flex; flex-direction: row; justify-content: space-evenly;">
+		<li class="nav-item">
+			<a class="nav-link" id="back_to_home">HOME</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="home_to_profile">PROFILE</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link bg-primary" id="home_to_symptoms">NEW ENTRY</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="home_to_milestones">MILESTONES</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="home_to_milestones">ENTRIES</a>
+		</li>
+	</ul>
+	<div id="container">
 
-	<!-- 2. SYMPTOMS PAGE -->
-	<div id="symptoms" style="display:initial">
+		<!-- 1. HOME PAGE -->
+		<div id="home" style="display:initial" class="bg-light m-5">
+			<div class="wrapper">
+				<div id="calendar"></div>
+				<div id="calendar_data"></div>
+			</div>
+		</div>
 
-		<form id="symptoms_form">
 
-			<label for="overall_slider">How are you feeling overall?</label><br>
-			<input type="range" width= id="overall_slider" class="slider" min="1" max="100" value="50">
-			
-			<!-- ************ ACCORDIAN ************ -->
-			<div class="panel panel-success">
+		<!-- 2. SYMPTOMS PAGE -->
+		<div id="symptoms" style="display:initial">
+			<form id="symptoms_form">
+
+				<label for="overall_slider">How are you feeling overall?</label><br>
+				<input type="range" width=id="overall_slider" class="slider" min="1" max="100" value="50">
+
+				<!-- ************ ACCORDIAN ************ -->
+				<div class="panel panel-success">
 					<div class="panel-header with-border">
 						<h2 class="panel-title text-center">Symptoms</h2>
 					</div>
@@ -44,53 +58,87 @@
 					<!-- form start -->
 					<form class="form-horizontal">
 						<div class="panel-body">
-						
-								<div class="panel-group" id="accordion" role="tablist"
-									aria-multiselectable="true">
-								</div>
-								
-								<div class="col-md-12 text-center" style="margin-top:15px;">
-									<button class="btn btn-success" id="addButton" value="">
-										<span class="glyphicon glyphicon-plus">
-										</span> Add </button>
-								</div>
-			
-							
+
+							<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+							</div>
+
+							<div class="col-md-12 text-center" style="margin-top:15px;">
+								<button class="btn btn-success" id="addButton" value="">
+									<span class="glyphicon glyphicon-plus">
+									</span> Add </button>
+							</div>
+
+
 						</div>
 						<!-- /.panel-body -->
 						<div class="panel-footer">
 							<div class="col-sm-offset-3 col-sm-6 text-center">
-								
+
 							</div>
-			
+
 						</div>
 						<!-- /.box-footer -->
 					</form>
 				</div>
+				<!-- ************ ACCORDIAN ************ -->
+
+
+
+				<button type="submit" id="symptoms_to_journal" class="btn btn-primary fw-bold">Next</button>
+			</form>
+			<br>
+			<hr><br>
+		</div>
+
+	<br><hr><br>
+	
+	
+
+	
+	
+
+
+		<!-- 3. JOURNAL PAGE -->
+		<div id="journal" style="display:initial">
+			<!-- todo: date -->
+			<h2 class="text-secondary mt-0 text-center">Write Down Your Thoughts</h2>
+			<form id="journal_form" class="center d-flex">
+				<textarea id="journal_text" name="jEntry" rows="4" cols="50"
+					placeholder="Enter your thoughts here..."></textarea><br>
+				<button type="submit" id="journal_to_home" class="btn btn-primary">Submit</button>
+			</form>
+			<br>
+			<hr><br>
+		</div>
+
+
+		<!-- 4. PROFILE PAGE -->
+		<div id="profile" style="display:initial">
+			<h2 class="text-secondary mt-0 text-center">Your Profile</h2>
+			
+			<div class="d-flex flex-row" style="display: flex; flex-direction: row;">
+				<img class="rounded float-start"
+				alt="profile picture"
+			src=https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80 />
+				<div style="margin-left: 10px;">
+					<p><strong>Name:</strong> {{Full Name}}</p>
+					<p><strong>DOB:</strong> {{Month/Day/Year}}</p>
+					<p><strong>Address:</strong>{{Full Address Line}}</p>
+					<p><strong>City:</strong>{{Seattle}}</p>
+					<p><strong>State:</strong>{{WA}}</p>
+					<p><strong>Phone Number:</strong></p>
+					<br>
+					<p><strong>Medication:</strong></p>
+					<p><strong>Insurance:</strong></p>
+					<br>
+				</div>
+				
+				<hr><br>
+
 			</div>
-			<!-- ************ ACCORDIAN ************ -->
+		</div>
 
-
-
-			<button type="submit" id="symptoms_to_journal">Next</button>
-		</form>
-	</div>
-	
-	<br><hr><br>
-
-	<!-- 3. JOURNAL PAGE -->
-	<div id="journal" style="display:initial">
-		<!-- todo: date -->
-		<h1>Write Down Your Thoughts</h1>
-	   <form id="journal_form">
-			<textarea id = "journal_text" name = "jEntry" rows = "4" cols = "50" placeholder="Enter your thoughts here..."></textarea><br>
-			<button type="submit" id="journal_to_home">Submit</button>
-		</form>
-	</div>
-
-	<br><hr><br>
-	
-	<!-- 4. PROFILE PAGE -->
+		<!-- jaden version eventaully be final version 4. PROFILE PAGE 
 	<div id="profile" style="display:initial">
 		<h1>Your Profile</h1>
 		
@@ -103,11 +151,13 @@
 		<p id="pAddress">Address:</p>
 		<p id="pPhone_number">Phone Number:</p>
 		<p id="pMedication">Medication:</p>
-	<br><hr><br>
+	<br><hr><br>-->
 
-	</div>
+	</div>		
 
-	<br><hr><br>
+		<div class="clear"></div>
+
+		
 	<!-- 4.5. "CREATE PROFILE" PAGE -->
         <div id="create_profile" style="display:initial">
                 <h1>Create Profile</h1>
@@ -144,8 +194,9 @@
         </div>
 	
         <br><hr><br>
-	
-	<!-- 5. MILESTONES PAGE -->
+
+
+		<!-- 5. MILESTONES PAGE -->
 	<div id="milestones" style="display:initial">
 		<h1>Milestones</h1>
 		<div id="m1">
@@ -170,23 +221,42 @@
 
 
 	<br><hr><br>
+
+		<!-- idk who wrote this but i'll take it out 5. MILESTONES PAGE -->
+		<!--<div id="milestones" style="display:initial">
+			<h2 class="text-secondary mt-0 text-center">Milestones</h2>
+			<!--<div id="my_dataviz"></div>-->
+			<div class="milestone-list">
+				<!--This is where you would map out the each milestone-->
+				<!--Just ensure a milestone appears with a name and description -->
+				<div class="milestone">
+					<h3 class="text-primary milestone-header ">
+						Milestone Name
+					</h3>
+					<p class="milestone-body">
+						A brief description of the milestone
+					</p>
+				</div>
+			</div>
+		</div> -->
+
+
+		<!-- 6. VISUALIZATIONS PAGE -->
+		<div id="viz" style="display:initial">
+			<h2 class="text-secondary mt-0 text-center">Visualizations of your data</h2>
+		</div>
+
+
+
 	</div>
-	
-	<br><hr><br>
-	
-	<!-- 6. VISUALIZATIONS PAGE -->
-	<div id="viz" style="display:initial">
-		<h1>Visualizations of your data</h1>
-	</div>
-
-
-
-</div>
-<script src="js/createProfile.js"></script>
-<script src="js/milestones.js"></script>
-<script src="js/notification.js"></script>
-<script src="js/jquery-3.6.0.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/foreground.js"></script> <!-- do not move. this script must be ran after all DOM content has been loaded -->
+	<script src="js/jquery-3.6.0.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/calendar.js"></script>
+	<script src="js/notification.js"></script>
+	<!--<script src="js/visualization.js"></script>-->
+  <script src="js/foreground.js"></script>
+	<!-- do not move. this script must be ran after all DOM content has been loaded -->
 </body>
+
 </html>
+

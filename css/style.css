@@ -122,6 +122,15 @@ textarea
 	clear: both;
 }
 
+#graph
+{
+	text-align: center;
+	padding-bottom: 50px;
+	padding-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 #line-graph
 {}
     

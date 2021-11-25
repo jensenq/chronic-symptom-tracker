@@ -1,7 +1,6 @@
 
-<<<<<<< Updated upstream
 /* implementation idea: "changes page" by setting all 
-=======
+
 /* add click listeners for buttons to change page */
 window.onload = function(){
 	changePage("home"); 
@@ -75,10 +74,8 @@ function saveJournalForm(event){
 	entryCounter();
 	changePage("home")	
 }
-<<<<<<< Updated upstream
 let journal_form = document.getElementById('journal_form')
 journal_form.addEventListener('submit', saveJournalForm)
-=======
 /* increases the counter keeping track of number of jounral entries by 1
 */
 function entryCounter(){
@@ -101,7 +98,6 @@ function entryCounter(){
 	
 	
 }
->>>>>>> Stashed changes
 
 
 /* accordian logic */

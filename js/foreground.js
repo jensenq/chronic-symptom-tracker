@@ -1,4 +1,3 @@
-
 /* all startup tasks here */
 window.onload = function(){
 	changePage("home"); 
@@ -65,6 +64,7 @@ function changePage(target_page){
 		}
 	}
 	document.getElementById(target_page).style.display = 'block';
+
 }
 
 function setChangePageEvents(){
@@ -77,6 +77,18 @@ function setChangePageEvents(){
 	document.getElementById('journal_form')       .addEventListener('submit', saveJournalForm)
 }
 
+/* "changes page" by setting all 
+ * other page's div's to display:none
+ */
+function changePage(target_page){
+	var page_ids = ["home", "symptoms", "journal", "profile", "create_profile", "milestones", "viz"]
+	for (const page_id of page_ids) {
+		if (page_id != target_page){
+			document.getElementById(page_id).style.display = 'none';
+		}
+	}
+	document.getElementById(target_page).style.display = 'block';
+}
 
 /* Symptoms page
  * upon submit, get all values in the accordian and change page to Journal
@@ -208,4 +220,3 @@ $(document).ready(function(){
 			
      });
   });
-

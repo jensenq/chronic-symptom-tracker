@@ -1,28 +1,81 @@
-
-/* add click listeners for buttons to change page */
+/* all startup tasks here */
 window.onload = function(){
 	changePage("home"); 
-	document.getElementById("home_to_symptoms").addEventListener('click', function(){
-	    changePage("symptoms")
-	});
-	document.getElementById("home_to_profile").addEventListener('click', function(){
-	    changePage("profile")
-	});
-	document.getElementById("home_to_milestones").addEventListener('click', function(){
-	    changePage("milestones")
-	});
-	document.getElementById('symptoms_form').addEventListener('submit', saveSymptomsForm);
-	document.getElementById('journal_form').addEventListener('submit', saveJournalForm)
-	document.getElementById("symptoms_to_journal").addEventListener('click', function(){
-	    changePage("journal")
-	});
-	document.getElementById("journal_to_home").addEventListener('click', function(){
-	    changePage("home")
-	});
-	document.getElementById("back_to_home").addEventListener('click', ()=>changePage("home"));
-	
+	setChangePageEvents();
+	initCalHeatmap();
 }
 
+function initCalHeatmap(){
+
+	document.getElementById("year").innerHTML = new Date().getFullYear();
+
+	var cal = new CalHeatMap();
+	var now = new Date(3600000*Math.floor(Date.now()/3600000));
+
+	cal.init({
+		itemSelector: "#cal-heatmap",
+		domain: "month",
+		subDomain: "x_day",
+		data: "../data/test_entries.json", // todo: why isnt this right?
+		//afterLoadData: parse_entry_data,
+		start: now,
+		cellSize: 20,
+		cellPadding: 5,
+		domainGutter: 20,
+		range: 1,
+		domainDynamicDimension: false,
+		previousSelector: "#prev_month",
+		nextSelector: "#next_month",
+		domainLabelFormat: function(date) {
+			moment.locale("en");
+			return moment(date).format("MMMM").toUpperCase();
+		},
+		subDomainTextFormat: "%d",
+		weekStartOnMonday: false,
+		highlight: ["now"],
+		displayLegend: false
+	});
+}
+
+var parse_entry_data = function(data){
+	var stats = {};
+	for (var d in data) {
+		console.log(d + " | " + data[d])
+		stats[data[d].date] = data[d].value;
+	}
+	return stats;
+}
+
+function cal_onclick(date, value){
+	console.log("Date: " + date + "\nValue: " +
+			(value === null ? "unknown" : value));
+}
+
+
+
+/* "changes page" by setting all 
+ * other page's div's to display:none
+ */
+function changePage(target_page){
+	var page_ids = ["home", "symptoms", "journal", "profile", "create_profile", "milestones", "viz"]
+	for (const page_id of page_ids) {
+		if (page_id != target_page){
+			document.getElementById(page_id).style.display = 'none';
+		}
+	}
+	document.getElementById(target_page).style.display = 'block';
+
+}
+
+function setChangePageEvents(){
+	document.getElementById("home_to_symptoms")   .addEventListener('click', function(){changePage("symptoms")});
+	document.getElementById("home_to_profile")    .addEventListener('click', function(){changePage("profile")});
+	document.getElementById("home_to_milestones") .addEventListener('click', function(){changePage("milestones")});
+	document.getElementById("symptoms_to_journal").addEventListener('click', function(){changePage("journal")});
+	document.getElementById("journal_to_home")    .addEventListener('click', function(){changePage("home") });
+	document.getElementById('symptoms_form')      .addEventListener('submit', saveSymptomsForm);
+	document.getElementById('journal_form')       .addEventListener('submit', saveJournalForm)
+}
 
 /* "changes page" by setting all 
  * other page's div's to display:none
@@ -62,6 +115,7 @@ function saveJournalForm(event){
 	chrome.storage.sync.set({ text });
 	changePage("home")	
 }
+
 
 
 /* accordian logic */

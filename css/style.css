@@ -12,7 +12,7 @@ html {
 html,
 body {
 	width:  600px;
-	height: 600px;
+	height: 400px;
 	margin: 0;
 	padding: 0;
 	color: #fff;
@@ -28,6 +28,10 @@ a:hover {
 	text-decoration: underline;
 }
 
+hr
+{
+	border: 5px solid black;
+}
 /* ******* */
 
 .slider {
@@ -40,14 +44,15 @@ a:hover {
   opacity: 1;
 }
 
-.btn
+button
 {
-    background-color: aqua;
-    width: 80px;
+    background-color: white;
+    width: 120px;
     height: 40px;
-    border: none;
+    border: 2px solid black;
+	border-radius: 10px;
     color: white;
-    padding: 15px, 32px;
+    padding: 5px, 5px;
     text-align: center;
     font-size: 30px;
 }
@@ -71,20 +76,10 @@ a:hover {
 
 textarea
 {
-    resize: none;
+	font-size: 20px;
 }
 
-#home
-{
-
-}
-
-#symptoms
-{
-
-}
-
-#entry
+#journal
 {
 
 }
@@ -92,6 +87,16 @@ textarea
 #profile
 {
 
+}
+
+#profile h1
+{
+
+}
+
+#profile button
+{
+	float: right;
 }
 
 #profile-picture

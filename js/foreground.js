@@ -1,5 +1,37 @@
 
+<<<<<<< Updated upstream
 /* implementation idea: "changes page" by setting all 
+=======
+/* add click listeners for buttons to change page */
+window.onload = function(){
+	changePage("home"); 
+	document.getElementById("home_to_symptoms").addEventListener('click', function(){
+	    changePage("symptoms")
+	});
+	document.getElementById("home_to_profile").addEventListener('click', function(){
+	    //milestone1: check profile once to complete
+	    chrome.storage.sync.set({"m1": true}, function(result){});
+	    changePage("profile");
+	});
+	document.getElementById("home_to_create_profile").addEventListener('click', function(){
+	    changePage("create_profile");
+	});
+	document.getElementById("home_to_milestones").addEventListener('click', function(){
+	    changePage("milestones")
+	});
+	document.getElementById('symptoms_form').addEventListener('submit', saveSymptomsForm);
+	document.getElementById('journal_form').addEventListener('submit', saveJournalForm)
+	document.getElementById("symptoms_to_journal").addEventListener('click', function(){
+	    changePage("journal")
+	});
+	document.getElementById("journal_to_home").addEventListener('click', function(){
+	    changePage("home")
+	});
+}
+
+
+/* "changes page" by setting all 
+>>>>>>> Stashed changes
  * other page's div's to display:none
  * it might make things easier if we wrap it all in a <ul>,
  * with each page's div as an item inside this list
@@ -39,10 +71,37 @@ function saveJournalForm(event){
 
 	// todo: save data alongside date/time
 	chrome.storage.sync.set({ text });
+	//milestone 2: keep track of number of journal entries
+	entryCounter();
 	changePage("home")	
 }
+<<<<<<< Updated upstream
 let journal_form = document.getElementById('journal_form')
 journal_form.addEventListener('submit', saveJournalForm)
+=======
+/* increases the counter keeping track of number of jounral entries by 1
+*/
+function entryCounter(){
+	var counter = 0;
+
+
+	chrome.storage.sync.get('totalEntries', function(result){
+			counter = result.totalEntries;
+			counter ++;
+			console.log("parsed");
+			console.log(counter);
+			chrome.storage.sync.set({"totalEntries" : counter}, function(){
+					console.log("saved", counter);
+			});
+	});
+
+	
+
+
+	
+	
+}
+>>>>>>> Stashed changes
 
 
 /* accordian logic */

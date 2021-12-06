@@ -1,4 +1,3 @@
-
 /* all startup tasks here */
 window.onload = function(){
 	changePage("home"); 
@@ -55,6 +54,7 @@ function cal_onclick(date, value){
 
 
 /* "changes page" by setting all 
+
  * other page's div's to display:none
  */
 function changePage(target_page){
@@ -65,12 +65,14 @@ function changePage(target_page){
 		}
 	}
 	document.getElementById(target_page).style.display = 'block';
+
 }
 
 function setChangePageEvents(){
 	document.getElementById("home_to_symptoms")   .addEventListener('click', function(){changePage("symptoms")});
 	document.getElementById("home_to_profile")    .addEventListener('click', function(){changePage("profile")});
 	document.getElementById("home_to_milestones") .addEventListener('click', function(){changePage("milestones")});
+	document.getElementById("home_to_viz")        .addEventListener('click', function(){changePage("viz")});
 	document.getElementById("symptoms_to_journal").addEventListener('click', function(){changePage("journal")});
 	document.getElementById("journal_to_home")    .addEventListener('click', function(){changePage("home") });
 	document.getElementById('symptoms_form')      .addEventListener('submit', saveEntryData);
@@ -139,7 +141,30 @@ function saveJournalForm(event){
 
 	// todo: save data alongside date/time
 	chrome.storage.sync.set({ text });
+	//milestone 2: keep track of number of journal entries
+	entryCounter();
 	changePage("home")	
+}
+
+let journal_form = document.getElementById('journal_form')
+journal_form.addEventListener('submit', saveJournalForm)
+
+
+/* increases the counter keeping track of number of jounral entries by 1
+*/
+function entryCounter(){
+	var counter = 0;
+
+
+	chrome.storage.sync.get('totalEntries', function(result){
+			counter = result.totalEntries;
+			counter ++;
+			console.log("parsed");
+			console.log(counter);
+			chrome.storage.sync.set({"totalEntries" : counter}, function(){
+			});
+	});
+	
 }
 
 
@@ -244,4 +269,3 @@ $(document).ready(function(){
 			
      });
   });
-

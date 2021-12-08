@@ -6,8 +6,8 @@ form.addEventListener("submit", function(){
 	chrome.storage.sync.set({"dob": data["dob"].value}, function() {});
 	chrome.storage.sync.set({"address": data["address"].value}, function() {});
 	chrome.storage.sync.set({"phone_number": data["phone_number"].value}, function() {});
-	chrome.storage.sync.set({"healthcare_provider": data["healthcare_provider"].value}, function() {});
 	chrome.storage.sync.set({"medications": data["medications"].value}, function() {});
+	chrome.storage.sync.set({"insurance": data["insurance"].value}, function() {});
 	//chrome.storage.local.set({"profile_picture": data["profile_picture"].value}, function() {});
 
 	console.log("profile saved");
@@ -43,9 +43,16 @@ function updateProfile(){
 	});
 	chrome.storage.sync.get("medications", function(result){
 		let meds = document.getElementById("pMedication").innerHTML;
-		document.getElementById("pMedication").innerHTML = meds + ' ' + result.medications
+		document.getElementById("pMedication").innerHTML = meds + ' ' + result.medications;
 			
 	});
+	chrome.storage.sync.get("insurance", function(result){
+		let ins = document.getElementById("pInsurance").innerHTML;
+		document.getElementById("pInsurance").innerHTML = ins + ' ' + result.insurance;
+			
+	});
+
+
 	/*chrome.storage.local.get("profile_picture", function(result){
 		document.getElementById("profile-picture").innerHTML = "";
 		let img = document.createElement("img");

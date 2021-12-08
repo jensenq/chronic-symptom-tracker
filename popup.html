@@ -7,7 +7,6 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="css/style.css" type="text/css">
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-	<script src="https://d3js.org/d3.v6.js"></script>
 </head>
 
 <body>
@@ -16,19 +15,19 @@
 	<ul class="nav nav-pills justify-content-center   border-bottom m-auto"
 	style="width: 100%; display:flex; flex-direction: row; justify-content: space-evenly;">
 		<li class="nav-item">
-			<a class="nav-link" id="back_to_home">HOME</a>
+			<a class="nav-link" id="to_home">HOME</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" id="home_to_profile">PROFILE</a>
+			<a class="nav-link" id="to_profile">PROFILE</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link bg-primary" id="home_to_symptoms">NEW ENTRY</a>
+			<a class="nav-link bg-primary" id="to_symptoms">NEW ENTRY</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" id="home_to_milestones">MILESTONES</a>
+			<a class="nav-link" id="to_milestones">MILESTONES</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" id="home_to_viz">SUMMARY</a>
+			<a class="nav-link" id="to_viz">SUMMARY</a>
 		</li>
 	</ul>
 	<div id="container">
@@ -82,6 +81,7 @@
 				</div>
 				<!-- ************ ACCORDIAN ************ -->
 
+				<button id="save_symptoms" class="btn btn-primary fw-bold">Save Symptoms</button>
 				<button type="submit" id="symptoms_to_journal" class="btn btn-primary fw-bold">Next</button>
 			</form>
 			<br>
@@ -119,40 +119,22 @@
 				alt="profile picture"
 			src=https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80 />
 				<div style="margin-left: 10px;">
-					<p><strong>Name:</strong> {{Full Name}}</p>
-					<p><strong>DOB:</strong> {{Month/Day/Year}}</p>
-					<p><strong>Address:</strong>{{Full Address Line}}</p>
-					<p><strong>City:</strong>{{Seattle}}</p>
-					<p><strong>State:</strong>{{WA}}</p>
-					<p><strong>Phone Number:</strong></p>
+					<p id="pName"><strong>Name:</strong> </p>
+					<p id="pDob"><strong>DOB:</strong> </p>
+					<p id="pAddress"><strong>Address:</strong></p>
+					<p id="pPhone_number"><strong>Phone Number:</strong></p>
 					<br>
-					<p><strong>Medication:</strong></p>
-					<p><strong>Insurance:</strong></p>
+					<p id="pMedication"><strong>Medication:</strong></p>
+					<p id="pInsurance"><strong>Insurance:</strong></p>
 					<br>
 				</div>
 				
 				<hr><br>
 
 			</div>
+				<a class=" bg-primary" id="to_create_profile">Create Profile</a>
 		</div>
 
-		<!-- jaden version eventaully be final version 
-	4. PROFILE PAGE 
-	<div id="profile" style="display:initial">
-		<h1>Your Profile</h1>
-		
-		<div id="profile-picture">
-			
-			<h4>Your picture here</h4>
-		</div>
-		<p id="pName">Name:</p>
-		<p id="pDob">DOB:</p>
-		<p id="pAddress">Address:</p>
-		<p id="pPhone_number">Phone Number:</p>
-		<p id="pMedication">Medication:</p>
-	<br><hr><br>-->
-
-	</div>		
 
 		<div class="clear"></div>
 
@@ -176,16 +158,17 @@
                         Phone Number (X-XXX-XXX-XXXX) :
                         <input type="text" id="phone_number">
                         <br>
-                        Healthcare Provider :
-                        <input type="text" id="healthcare_provider">
-                        <br>
                         Medications(comma seperated) :
                         <input type="text" id="medications">
                         <br>
+								Insurance 
+                        <input type="text" id="insurance">
+                        <br>
+
 			<!--Select Profile Picture (jpg,img,png)
 			<input type="file" id="profile_picture">
 			<br> -->
-                        <input type="submit">
+                        <input type="submit" id="profile_form">
 
 
 
@@ -221,46 +204,18 @@
 
 	<br><hr><br>
 
-		<!-- idk who wrote this but i'll take it out 5. MILESTONES PAGE -->
-		<div id="milestones" style="display:initial">
-			<h2 class="text-secondary mt-0 text-center">Milestones</h2>
-			<!--<div id="my_dataviz"></div>
-			<div class="milestone-list">
-				<!--This is where you would map out the each milestone-->
-				<!--Just ensure a milestone appears with a name and description -->
-				<div class="milestone">
-					<h3 class="text-primary milestone-header ">
-						Milestones
-					</h3>
-					<p class="milestone-body">
-						m1 : check profile once 
-m2a, m2b, m2c, m2d, m2e : create 1, 5, 10, 20, 50 entries
-
-					</p>
-				</div>
-			</div>
-		</div>
-
-
-		<!-- 6. VISUALIZATIONS PAGE -->
-		<div id="viz" style="display:initial">
-			<h2 class="text-secondary mt-0 text-center">Visualizations of your data</h2>
-			<div id="graph" style="height:0;width:80%;padding-bottom:20%;background-color:red">
-				<h4>ERROR: Could not load graph</h4>
-			</div>
-		</div>
-
-
 
 	</div>
+	</div>		
+
 	<script src="js/jquery-3.6.0.min.js"></script>
+	<script src="js/d3.min.js"></script> 
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/createProfile.js"></script> 
 	<script src="js/calendar.js"></script>
 	<script src="js/notification.js"></script>
 	<script src="js/milestones.js"></script>
-	<!--<script src="js/visualization.js"></script>-->
-  <script src="js/foreground.js"></script>
-	<!-- do not move. this script must be ran after all DOM content has been loaded -->
+	<script src="js/foreground.js"></script>
 </body>
 
 </html>

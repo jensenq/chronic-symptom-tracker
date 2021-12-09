@@ -108,9 +108,8 @@ function calendar() {
         if (today === Calendar.getDate()) {
           html += `<td class="display:flex; flex-direction:col;">
               <a 
-              class="today_cal" 
+              id="today_cal" 
               href="#" data-id="${info}" 
-              onclick="alert(${CheckDateForNotes(info)})"
               style='${
                 CheckDateForNotes(info)
                   ? "background-color:#ADF5B8; color:#2D2D2D;"
@@ -123,7 +122,6 @@ function calendar() {
           html += `<td>
               <a 
               href="#" data-id="${info}" 
-              onclick="alert(${CheckDateForNotes(info)})"
               style='${
                 CheckDateForNotes(info)
                   ? "background-color:#ADF5B8; color:#2D2D2D;"

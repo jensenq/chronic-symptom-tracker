@@ -27,10 +27,11 @@
 			<a class="nav-link" id="to_milestones">MILESTONES</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" id="to_viz">SUMMARY</a>
+			<a class="nav-link" id="to_summary">SUMMARY</a>
 		</li>
 	</ul>
 	<div id="container">
+	<hr>
 
 		<!-- 1. HOME PAGE -->
 		<div id="home" style="display:initial" class="bg-light m-5">
@@ -46,7 +47,7 @@
 			<form id="symptoms_form">
 
 				<label for="overall_slider">How are you feeling overall?</label><br>
-				<input type="range" width=id="overall_slider" class="slider" min="1" max="100" value="50">
+				<input type="range" id="overall_slider" class="slider" min="1" max="100" value="50">
 
 				<!-- ************ ACCORDIAN ************ -->
 				<div class="panel panel-success">
@@ -81,14 +82,12 @@
 				</div>
 				<!-- ************ ACCORDIAN ************ -->
 
-				<button id="save_symptoms" class="btn btn-primary fw-bold">Save Symptoms</button>
 				<button type="submit" id="symptoms_to_journal" class="btn btn-primary fw-bold">Next</button>
 			</form>
 			<br>
 			<hr><br>
 		</div>
 
-	<br><hr><br>
 	
 	
 
@@ -173,39 +172,44 @@
 
 
                 </form>
+        <br><hr><br>
         </div>
 	
-        <br><hr><br>
 
 
 		<!-- 5. MILESTONES PAGE -->
-	<div id="milestones" style="display:initial">
+	<div id="milestones" style="display:none">
 		<h1>Milestones</h1>
 		<div id="m1">
-			m1:
 		</div>
 		<div id="m2a">
-			m2a:
 		</div>
 		<div id="m2b">
-			m2b:
 		</div>
 		<div id="m2c">
-			m2c:
 		</div>
-		<div id="m2d">
-			m2d:
+		<div id="m3">
 		</div>
-		<div id="m2e">
-			m2e:
+		<div id="m4">
 		</div>
-
-
-
-	<br><hr><br>
-
-
 	</div>
+
+
+		<!-- 6. SUMMARY PAGE -->
+	<div id="summary" style="display:none">
+		<h4> Summary of the entry made on: 
+			<span id="date"></span>
+		</h4>
+		<h6> Symptom : Score </h6>
+		<div id="entry_data"></div>
+		<h6> Journal Entry </h6>
+		<div id="journal_data"></div>
+		
+		
+	</div>
+
+
+
 	</div>		
 
 	<script src="js/jquery-3.6.0.min.js"></script>

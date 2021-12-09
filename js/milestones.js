@@ -20,64 +20,55 @@ function checkNumEntries(){
 					chrome.storage.sync.set({'m2c' : true}, function(){});
 
 			}
-			if(entries >= 20){
-					chrome.storage.sync.set({'m2d' : true}, function(){});
-
-			}
-			if(entries >= 50){
-					chrome.storage.sync.set({'m2e' : true}, function(){});
-
-			}
-
-
-
 	});
 }
 
 //checks milestones at install and whenever storage is modified
 function update(){
+
 	checkNumEntries();
-//for each milestone check its value and update display
+
+	//for each milestone check its value and update display
 	chrome.storage.sync.get('m1', function (result) {
 		if(result.m1 == true){
-			document.getElementById("m1").innerHTML = "m1 true";
+			document.getElementById("m1").innerHTML = "Create a profile - Complete!";
 		}else{
-			document.getElementById("m1").innerHTML = "m1 false";
+			document.getElementById("m1").innerHTML = "Create a profile In Progress";
 		}
 	});
 	chrome.storage.sync.get('m2a', function (result) {
 		if(result.m2a == true){
-			document.getElementById("m2a").innerHTML = "m2a true";
+			document.getElementById("m2a").innerHTML = "Make your first entry - Complete!";
 		}else{
-			document.getElementById("m2a").innerHTML = "m2a false";
+			document.getElementById("m2a").innerHTML = "Make your first entry In Progress";
 		}
 	});
 	chrome.storage.sync.get('m2b', function (result) {
 		if(result.m2b == true){
-			document.getElementById("m2b").innerHTML = "m2b true";
+			document.getElementById("m2b").innerHTML = "Make 5 entries - Complete!";
 		}else{
-			document.getElementById("m2b").innerHTML = "m2b  false";
+			document.getElementById("m2b").innerHTML = "Make 5 entries  In Progress";
 		}
 	});
 	chrome.storage.sync.get('m2c', function (result) {
 		if(result.m2c == true){
-			document.getElementById("m2c").innerHTML = "m2c true";
+			document.getElementById("m2c").innerHTML = "Make 10 entries - Complete!";
 		}else{
-			document.getElementById("m2c").innerHTML = "m2c  false";
+			document.getElementById("m2c").innerHTML = "Make 10 entries  In Progress";
 		}
 	});
-	chrome.storage.sync.get('m2d', function (result) {
+	chrome.storage.sync.get('m3', function (result) {
 		if(result.m2d == true){
-			document.getElementById("md").innerHTML = "m2d true";
+			document.getElementById("m3").innerHTML = "Reach a 7-day streak - Complete!";
 		}else{
-			document.getElementById("m2d").innerHTML = "m2d false";
+			document.getElementById("m3").innerHTML = "Reach a 7-day streak In Progress";
 		}
 	});
-	chrome.storage.sync.get('m2e', function (result) {
+	chrome.storage.sync.get('m4', function (result) {
 		if(result.m2e == true){
-			document.getElementById("m2e").innerHTML = "m2e true";
+			document.getElementById("m4").innerHTML = "Use 3 descriptors for a symptom - Complete!";
 		}else{
-			document.getElementById("m2e").innerHTML = "m2e  false";
+			document.getElementById("m4").innerHTML = "Use 3 descriptors for a symptom  In Progress";
 		}
 	});
 }

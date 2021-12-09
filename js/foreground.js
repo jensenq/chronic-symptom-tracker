@@ -4,23 +4,16 @@ window.onload = function(){
 	setChangePageEvents();
 }
 
-
-var parse_entry_data = function(data){
-	var stats = {};
-	for (var d in data) {
-		console.log(d + " | " + data[d])
-		stats[data[d].date] = data[d].value;
-	}
-	return stats;
+function get_todays_date(){
+	return (new Date()).toISOString().slice(0,10).replace(/-/g,"").toString();
 }
-
 
 /* "changes page" by setting all 
 
  * other page's div's to display:none
  */
 function changePage(target_page){
-	var page_ids = ["home", "symptoms", "journal", "profile", "create_profile", "milestones"]
+	var page_ids = ["home", "symptoms", "journal", "profile", "create_profile", "milestones", "summary"]
 	for (const page_id of page_ids) {
 		if (page_id != target_page){
 			document.getElementById(page_id).style.display = 'none';
@@ -31,19 +24,16 @@ function changePage(target_page){
 }
 
 function setChangePageEvents(){
-	document.getElementById("to_home")   .addEventListener('click', function(){changePage("home")});
+	document.getElementById("to_home")       .addEventListener('click', function(){changePage("home")});
 	document.getElementById("to_symptoms")   .addEventListener('click', function(){changePage("symptoms")});
 	document.getElementById("to_profile")    .addEventListener('click', function(){changePage("profile")});
 	document.getElementById("to_milestones") .addEventListener('click', function(){changePage("milestones")});
-	document.getElementById("to_viz")        .addEventListener('click', function(){changePage("viz")});
-	document.getElementById("symptoms_to_journal").addEventListener('click', function(){changePage("journal")});
+	document.getElementById("to_summary")    .addEventListener('click', function(){viewTodaysEntry()});
+	document.getElementById("symptoms_to_journal").addEventListener('click', function(){saveEntryData(); changePage("journal");});
 	document.getElementById("journal_to_home")    .addEventListener('click', function(){changePage("home") });
-	document.getElementById("to_create_profile")   .addEventListener('click', function(){changePage("create_profile")});
-	document.getElementById('symptoms_form')      .addEventListener('submit', saveEntryData);
+	document.getElementById("to_create_profile")  .addEventListener('click', function(){changePage("create_profile")});
+	document.getElementById('today_cal')          .addEventListener('click', function(){viewTodaysEntry() }); 
 	document.getElementById('journal_form')       .addEventListener('submit', saveJournalForm)
-
-	// bandaid, would prefer 1 button.
-	document.getElementById("save_symptoms")      .addEventListener('click', function(){saveEntryData() });
 
 }
 
@@ -51,7 +41,7 @@ function setChangePageEvents(){
  * this is then stored, keyed by the date in YYYYMMDD format (eg: nov 11th 2021 -> 20211124) 
  * this data can later be accessed with chrome.storage.sync.get(['20211124'] ...)
  */
-	function saveEntryData(){
+function saveEntryData(){
 
 	var overall_slider = document.getElementById("overall_slider");
 	var symptom_titles  = document.getElementsByClassName("symptom_title");
@@ -73,24 +63,39 @@ function setChangePageEvents(){
 		entry_dict[descriptor] = intensity;
 	}
 
-	var todays_date = (new Date()).toISOString().slice(0,10).replace(/-/g,"").toString()
-	chrome.storage.sync.set({todays_date : entry_dict});
+	var todays_date = get_todays_date(); 
+	chrome.storage.sync.set({[todays_date] : entry_dict});
+
 }
 
 
-function saveSymptomsHierarchy(){
 
-	var symptom_titles  = document.getElementsByClassName("symptom_title");
-	var descriptor_titles  = document.getElementsByClassName("descriptor_title");
 
-	for (var i=0; i<symptom_titles.length; i++){
-		console.log("symptom: " + symptom_titles[i].innerText.replace(/\s/g, "") );
-	}
+function viewTodaysEntry(){
+	changePage("summary");
 
-	for (var i=0; i<descriptor_titles.length; i++){
-		console.log("descriptor: " + descriptor_titles[i].innerText.replace(/\s/g, "") );
+	// show todays date in mm-dd-yyyy form
+	const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"];
+	const dateObj = new Date();
+	const month = monthNames[dateObj.getMonth()];
+	const day = String(dateObj.getDate()).padStart(2, '0');
+	const year = dateObj.getFullYear();
+	const output = month  + '\n'+ day  + ',' + year;
+	document.querySelector('#date').textContent = output; 
 
-	}
+	// get symptom data
+	var todays_date = get_todays_date(); 
+	chrome.storage.sync.get([todays_date], function(result){
+		var tmp = makeUL(result, todays_date);
+		document.getElementById("entry_data").appendChild(tmp);
+	});
+
+	// get journal data
+	var key = get_todays_date()+"_journalentry";  // this is jank, dont @ me
+	chrome.storage.sync.get([key], function(result){
+		document.querySelector('#journal_data').textContent = result[key]; 
+	});
 }
 
 
@@ -102,8 +107,8 @@ function saveJournalForm(event){
 	event.preventDefault();
 	var text = event.target.children.journal_text.value
 
-	// todo: save data alongside date/time
-	chrome.storage.sync.set({ text });
+	var key = get_todays_date()+"_journalentry";  // this is jank, dont @ me
+	chrome.storage.sync.set({[key] : text});
 	//milestone 2: keep track of number of journal entries
 	entryCounter();
 	changePage("home")	
@@ -122,13 +127,41 @@ function entryCounter(){
 	chrome.storage.sync.get('totalEntries', function(result){
 			counter = result.totalEntries;
 			counter ++;
-			console.log("parsed");
-			console.log(counter);
+			//console.log("parsed");
+			//console.log(counter);
 			chrome.storage.sync.set({"totalEntries" : counter}, function(){
 			});
 	});
 	
 }
+
+function makeUL(result, todays_date) {
+	var ul = document.createElement('ul');
+
+	for (const [key, value] of Object.entries(result[todays_date])) {
+		var li = document.createElement('li');
+		li.appendChild(document.createTextNode(key + ": " + value));
+		ul.appendChild(li);
+    }
+    return ul;
+}
+
+
+function saveSymptomsHierarchy(){
+
+	var symptom_titles  = document.getElementsByClassName("symptom_title");
+	var descriptor_titles  = document.getElementsByClassName("descriptor_title");
+
+	for (var i=0; i<symptom_titles.length; i++){
+		console.log("symptom: " + symptom_titles[i].innerText.replace(/\s/g, "") );
+	}
+
+	for (var i=0; i<descriptor_titles.length; i++){
+		console.log("descriptor: " + descriptor_titles[i].innerText.replace(/\s/g, "") );
+
+	}
+}
+
 
 
 

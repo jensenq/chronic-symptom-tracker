@@ -8,34 +8,6 @@ function get_todays_date(){
 	return (new Date()).toISOString().slice(0,10).replace(/-/g,"").toString();
 }
 
-/* "changes page" by setting all 
-
- * other page's div's to display:none
- */
-function changePage(target_page){
-	var page_ids = ["home", "symptoms", "journal", "profile", "create_profile", "milestones", "summary"]
-	for (const page_id of page_ids) {
-		if (page_id != target_page){
-			document.getElementById(page_id).style.display = 'none';
-		}
-	}
-	document.getElementById(target_page).style.display = 'block';
-
-}
-
-function setChangePageEvents(){
-	document.getElementById("to_home")       .addEventListener('click', function(){changePage("home")});
-	document.getElementById("to_symptoms")   .addEventListener('click', function(){changePage("symptoms")});
-	document.getElementById("to_profile")    .addEventListener('click', function(){changePage("profile")});
-	document.getElementById("to_milestones") .addEventListener('click', function(){changePage("milestones")});
-	document.getElementById("to_summary")    .addEventListener('click', function(){viewTodaysEntry()});
-	document.getElementById("symptoms_to_journal").addEventListener('click', function(){saveEntryData(); changePage("journal");});
-	document.getElementById("journal_to_home")    .addEventListener('click', function(){changePage("home") });
-	document.getElementById("to_create_profile")  .addEventListener('click', function(){changePage("create_profile")});
-	document.getElementById('today_cal')          .addEventListener('click', function(){viewTodaysEntry() }); 
-	document.getElementById('journal_form')       .addEventListener('submit', saveJournalForm)
-
-}
 
 /* gets data from html and records all symptom/descriptor:intensity pairs in a dictionary.
  * this is then stored, keyed by the date in YYYYMMDD format (eg: nov 11th 2021 -> 20211124) 
@@ -66,8 +38,27 @@ function saveEntryData(){
 	var todays_date = get_todays_date(); 
 	chrome.storage.sync.set({[todays_date] : entry_dict});
 
+	saveSymptomsHierarchy();
+
 }
 
+
+
+function saveSymptomsHierarchy(){
+
+	let sym_des_box  = document.getElementsByClassName("sym_des_box");
+	console.log(sym_des_box);
+
+	for (var i=0; i<sym_des_box.length; i++){
+		var sym = sym_des_box[i].querySelector('.symptom_title').textContent;
+		console.log(sym);
+
+		var descriptors = sym_des_box[i].querySelectorAll('.descriptor_title');
+		for (var j=0; j<descriptors.length; j++){
+			console.log(descriptors[j].textContent);
+		}
+	}
+}
 
 
 
@@ -99,9 +90,7 @@ function viewTodaysEntry(){
 }
 
 
-
-/* Journal page
- * upon submit, get text and change page to home
+/* upon submit, save text and change page to home
  */
 function saveJournalForm(event){
 	event.preventDefault();
@@ -114,8 +103,7 @@ function saveJournalForm(event){
 	changePage("home")	
 }
 
-let journal_form = document.getElementById('journal_form')
-journal_form.addEventListener('submit', saveJournalForm)
+
 
 
 /* increases the counter keeping track of number of jounral entries by 1
@@ -135,6 +123,9 @@ function entryCounter(){
 	
 }
 
+
+/* makes a <ul> from the result of chrome.storage.sync.get
+ */
 function makeUL(result, todays_date) {
 	var ul = document.createElement('ul');
 
@@ -147,22 +138,35 @@ function makeUL(result, todays_date) {
 }
 
 
-function saveSymptomsHierarchy(){
 
-	var symptom_titles  = document.getElementsByClassName("symptom_title");
-	var descriptor_titles  = document.getElementsByClassName("descriptor_title");
+/* "changes page" by setting all 
 
-	for (var i=0; i<symptom_titles.length; i++){
-		console.log("symptom: " + symptom_titles[i].innerText.replace(/\s/g, "") );
+ * other page's div's to display:none
+ */
+function changePage(target_page){
+	var page_ids = ["home", "symptoms", "journal", "profile", "create_profile", "milestones", "summary"]
+	for (const page_id of page_ids) {
+		if (page_id != target_page){
+			document.getElementById(page_id).style.display = 'none';
+		}
 	}
+	document.getElementById(target_page).style.display = 'block';
 
-	for (var i=0; i<descriptor_titles.length; i++){
-		console.log("descriptor: " + descriptor_titles[i].innerText.replace(/\s/g, "") );
-
-	}
 }
 
+function setChangePageEvents(){
+	document.getElementById("to_home")       .addEventListener('click', function(){changePage("home")});
+	document.getElementById("to_symptoms")   .addEventListener('click', function(){changePage("symptoms")});
+	document.getElementById("to_profile")    .addEventListener('click', function(){changePage("profile")});
+	document.getElementById("to_milestones") .addEventListener('click', function(){changePage("milestones")});
+	document.getElementById("to_summary")    .addEventListener('click', function(){viewTodaysEntry()});
+	document.getElementById("symptoms_to_journal").addEventListener('click', function(){saveEntryData(); changePage("journal");});
+	document.getElementById("journal_to_home")    .addEventListener('click', function(){changePage("home") });
+	document.getElementById("to_create_profile")  .addEventListener('click', function(){changePage("create_profile")});
+	document.getElementById('today_cal')          .addEventListener('click', function(){viewTodaysEntry() }); 
+	document.getElementById('journal_form')       .addEventListener('submit', saveJournalForm)
 
+}
 
 
 /* accordian logic */
@@ -185,7 +189,7 @@ $(document).ready(function(){
 					  expandedClass = 'in';
 					  collapsedClass = '';
 				}
-				$(wrapper).append('<div class="col-sm-12" style="margin-bottom: 0;"><div class="panel panel-default" id="panel'+ counter +'">' + 
+				$(wrapper).append('<div class="sym_des_box col-sm-12" style="margin-bottom: 0;"><div class="panel panel-default" id="panel'+ counter +'">' + 
 				'<div class="panel-heading" role="tab" id="heading'+ counter +'"><h4 class="panel-title">' +
 				'<a class="symptom_title '+collapsedClass+'" id="panel-lebel'+ counter +'" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+ counter +'" ' +
 				'aria-expanded="'+ariaExpanded+'" aria-controls="collapse'+ counter +'"> '+catgName+

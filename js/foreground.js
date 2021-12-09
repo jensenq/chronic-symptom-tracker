@@ -36,40 +36,11 @@ function get_todays_date(){
 }
 
 
+
 /* gets data from html and records all symptom/descriptor:intensity pairs in a dictionary.
  * this is then stored, keyed by the date in YYYYMMDD format (eg: nov 11th 2021 -> 20211124) 
  * this data can later be accessed with chrome.storage.sync.get(['20211124'] ...)
- *
-function saveEntryData(){
-
-	var overall_slider = document.getElementById("overall_slider");
-	var symptom_titles  = document.getElementsByClassName("symptom_title");
-	var symptom_sliders = document.getElementsByClassName("symptom_slider");
-	var descriptor_titles  = document.getElementsByClassName("descriptor_title");
-	var descriptor_sliders = document.getElementsByClassName("descriptor_slider");
-
-	var entry_dict = {};
-	entry_dict["overall"] = overall_slider.value;
-
-	for (var i=0; i<symptom_titles.length; i++){
-		var symptom = symptom_titles[i].innerText.replace(/\s/g, "")
-		var intensity = symptom_sliders[i].value;
-		entry_dict[symptom] = intensity;
-	}
-	for (var i=0; i<descriptor_titles.length; i++){
-		var descriptor = descriptor_titles[i].innerText.replace(/\s/g, "") 
-		var intensity = descriptor_sliders[i].value;
-		entry_dict[descriptor] = intensity;
-	}
-
-	var todays_date = get_todays_date(); 
-	chrome.storage.sync.set({[todays_date] : entry_dict});
-
-	saveSymptomsHierarchy();
-
-}
-*/
-
+ */
 function saveSymptoms(){
 
 	let boxes = document.getElementsByClassName("sym_des_box");

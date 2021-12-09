@@ -1,3 +1,30 @@
+
+class Entry {
+	constructor(date, overall_score, symptoms, journal){
+		this.date = date;
+		this.overall_score = overall_score;
+		this.symptoms = symptoms;
+		this.journal = journal;
+		}
+}
+
+class Symptom {
+	constructor(title, score, descriptors){
+		this.title = title;
+		this.score = score;
+		this.descriptors = descriptors;
+	}
+}
+
+class Descriptor{
+	constructor(title, score){
+		this.title = title;
+		this.score = score;
+	}
+}
+
+
+
 /* all startup tasks here */
 window.onload = function(){
 	changePage("home"); 
@@ -12,7 +39,7 @@ function get_todays_date(){
 /* gets data from html and records all symptom/descriptor:intensity pairs in a dictionary.
  * this is then stored, keyed by the date in YYYYMMDD format (eg: nov 11th 2021 -> 20211124) 
  * this data can later be accessed with chrome.storage.sync.get(['20211124'] ...)
- */
+ *
 function saveEntryData(){
 
 	var overall_slider = document.getElementById("overall_slider");
@@ -41,64 +68,67 @@ function saveEntryData(){
 	saveSymptomsHierarchy();
 
 }
+*/
 
+function saveSymptoms(){
 
+	let boxes = document.getElementsByClassName("sym_des_box");
 
-function saveSymptomsHierarchy(){
+	var symptoms = [];
+	for (const box of boxes){
 
-	let sym_des_box  = document.getElementsByClassName("sym_des_box");
-	console.log(sym_des_box);
-
-	for (var i=0; i<sym_des_box.length; i++){
-		var sym = sym_des_box[i].querySelector('.symptom_title').textContent;
-		console.log(sym);
-
-		var descriptors = sym_des_box[i].querySelectorAll('.descriptor_title');
-		for (var j=0; j<descriptors.length; j++){
-			console.log(descriptors[j].textContent);
+		var d_boxes = box.querySelectorAll('.d_box');
+		var descriptors = [];
+		for (const d_box of d_boxes){
+			var title = d_box.querySelector('.descriptor_title').textContent
+			var score = d_box.querySelector('.descriptor_slider').value;
+			descriptors.push(new Descriptor(title, score));
 		}
+		
+		var title = box.querySelector('.symptom_title').textContent;
+		var score = box.querySelector('.symptom_slider').value;
+		symptoms.push(new Symptom(title, score, descriptors));
 	}
-}
+	
+	var todays_date = get_todays_date(); 
+	var overall = document.getElementById("overall_slider").value;
+	let entry = new Entry(todays_date, overall, symptoms, "");
 
+	chrome.storage.sync.set({[todays_date] : entry});
+	chrome.storage.sync.set({["hierarchy"] : entry});
+}
 
 
 function viewTodaysEntry(){
 	changePage("summary");
 
-	// show todays date in mm-dd-yyyy form
-	const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"];
-	const dateObj = new Date();
-	const month = monthNames[dateObj.getMonth()];
-	const day = String(dateObj.getDate()).padStart(2, '0');
-	const year = dateObj.getFullYear();
-	const output = month  + '\n'+ day  + ',' + year;
-	document.querySelector('#date').textContent = output; 
+	document.querySelector('#date').textContent = get_american_day(); 
 
-	// get symptom data
 	var todays_date = get_todays_date(); 
 	chrome.storage.sync.get([todays_date], function(result){
-		var tmp = makeUL(result, todays_date);
-		document.getElementById("entry_data").appendChild(tmp);
-	});
+		var entry = result[todays_date];
+		var entry_data_UL = makeSummaryUL(entry);
+		var j_text = entry.journal;
 
-	// get journal data
-	var key = get_todays_date()+"_journalentry";  // this is jank, dont @ me
-	chrome.storage.sync.get([key], function(result){
-		document.querySelector('#journal_data').textContent = result[key]; 
+		document.getElementById("entry_data").replaceWith(entry_data_UL);
+		document.querySelector('#journal_data').textContent = j_text; 
 	});
 }
 
 
-/* upon submit, save text and change page to home
+/* upon submit, save text, update the entry, go to home page
  */
 function saveJournalForm(event){
 	event.preventDefault();
 	var text = event.target.children.journal_text.value
 
-	var key = get_todays_date()+"_journalentry";  // this is jank, dont @ me
-	chrome.storage.sync.set({[key] : text});
-	//milestone 2: keep track of number of journal entries
+	var todays_date = get_todays_date(); 
+	chrome.storage.sync.get([todays_date], function(result){
+		var entry = result[todays_date];
+		entry.journal = text;
+		chrome.storage.sync.set({[todays_date] : entry});
+	});
+
 	entryCounter();
 	changePage("home")	
 }
@@ -124,17 +154,30 @@ function entryCounter(){
 }
 
 
-/* makes a <ul> from the result of chrome.storage.sync.get
+/* makes a <ul> from the symptoms and descriptors for an entry in the same hierarchical structure
  */
-function makeUL(result, todays_date) {
-	var ul = document.createElement('ul');
+function makeSummaryUL(entry) {
 
-	for (const [key, value] of Object.entries(result[todays_date])) {
-		var li = document.createElement('li');
-		li.appendChild(document.createTextNode(key + ": " + value));
-		ul.appendChild(li);
+	var s_ul = document.createElement('ul');
+	var overall_li = document.createElement('li');
+	overall_li.appendChild(document.createTextNode("Overall: " + entry.overall_score));
+	s_ul.appendChild(overall_li);
+
+	for (const symp of entry.symptoms) {
+
+		var d_ul = document.createElement('ul');
+		for (const desc of symp.descriptors) {
+			var d_li = document.createElement('li');
+			d_li.appendChild(document.createTextNode(desc.title + ": " + desc.score));
+			d_ul.appendChild(d_li);
+		}
+		var s_li = document.createElement('li');
+		s_li.appendChild(document.createTextNode(symp.title + ": " + symp.score));
+		s_ul.appendChild(s_li);
+		s_ul.appendChild(d_ul);
+		
     }
-    return ul;
+    return s_ul;
 }
 
 
@@ -160,7 +203,7 @@ function setChangePageEvents(){
 	document.getElementById("to_profile")    .addEventListener('click', function(){changePage("profile")});
 	document.getElementById("to_milestones") .addEventListener('click', function(){changePage("milestones")});
 	document.getElementById("to_summary")    .addEventListener('click', function(){viewTodaysEntry()});
-	document.getElementById("symptoms_to_journal").addEventListener('click', function(){saveEntryData(); changePage("journal");});
+	document.getElementById("symptoms_to_journal").addEventListener('click', function(){saveSymptoms(); changePage("journal");});
 	document.getElementById("journal_to_home")    .addEventListener('click', function(){changePage("home") });
 	document.getElementById("to_create_profile")  .addEventListener('click', function(){changePage("create_profile")});
 	document.getElementById('today_cal')          .addEventListener('click', function(){viewTodaysEntry() }); 
@@ -216,7 +259,7 @@ $(document).ready(function(){
 				var expandedClass = '';
 				var collapsedClass = 'collapsed';
 			
-				$(wrapper).find(parentPanel).append('<div class="col-sm-12" style="margin-bottom: 0;"><div class="panel panel-default" id="panel'+counter+'">' + 
+				$(wrapper).find(parentPanel).append('<div class="d_box col-sm-12" style="margin-bottom: 0;"><div class="panel panel-default" id="panel'+counter+'">' + 
 				'<div class="panel-heading" role="tab" id="heading'+counter+'"><h4 class="panel-title">' +
 				'<a class="descriptor_title '+collapsedClass+'" id="panel-lebel'+ counter +'" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+ counter+'" ' +
 				'aria-expanded="'+ariaExpanded+'" aria-controls="collapse'+ counter+'"> '+catgName+
@@ -258,14 +301,25 @@ $(document).ready(function(){
 	  	
 	     $(wrapper).on("click",".edit_ctg_label", function(e){ 
 	    	 var panelId = $(this).attr('accesskey');
-			 var catgName = prompt("Please Change your category name");
+			 var catgName = prompt("Change the symptom name");
 			 if(catgName == ''){
 				   return false;
 			 }
 			 if(catgName != null){
-				 $('#panel'+panelId).find("#panel-lebel"+panelId).html('').html(catgName);
+				 $('#panel'+panelId).find("#panel-lebel"+panelId).html('').html(catgName+'<input  type="range" class="slider symptom_slider" min="1" max="100" value="50">');
 			 }
 				
 			
      });
   });
+
+function get_american_day(){
+	// show todays date in month-dd-yyyy form
+	const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"];
+	const dateObj = new Date();
+	const month = monthNames[dateObj.getMonth()];
+	const day = String(dateObj.getDate()).padStart(2, '0');
+	const year = dateObj.getFullYear();
+	return month  + '\n'+ day  + ',' + year;
+}
